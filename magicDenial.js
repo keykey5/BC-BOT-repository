@@ -408,7 +408,7 @@ ChatRoomMessageAdditionDict["DenialRule"] = function(SenderCharacter, msg, data)
 Player.Description = `Welcome to ` + Player.Name + ` DENIAL BAR
 
 FOR SUBMISSIVE CUSTOMERS:
-To all our subs customer we provide a free vibrating dildo and chastity belt upon entering.
+To all our subs customers we provide a free vibrating dildo and chastity belt upon entering.
 Those that demonstrate to have solid submissive history will also receive a complementary anal vibrator!
 Just remember that in our establishment you are prohibited to have orgasms, unless properly authorized by one of our mistress customers.
 Transgressors will be harshly punished.
@@ -428,7 +428,7 @@ To be released from your dollification predicament you have to demonstrate your 
 SHOP:
 In the shop you will be able to buy the following items:
 - Orgasm permission (` + permissionCost + ` points): give this permission to whoever you want (yourself included) to allow them to have a nice orgasm! A nice reward for a good girl.
-- Punishment (` + punishmentCost + ` points): what more to say ^_^.
+- Punishment (` + punishmentCost + ` points): what more to say ^_^ other than you can punish anyone, including yourself.
 - DomLv2 (` + DomLv2Cost + ` points): upgrade your status inside this bar, you will be given the authority to change the vibrators settings as you wish. But remember: turning them off is always prohibited!
 - Adulation (` + adulationCost + ` points): we want you to feel appreciated while you are here. You will get some lovely attentions.
 ------------------------------------------------
@@ -441,7 +441,7 @@ Following commands are for dommes only.
 !shop - identical to !buy, read below.
 !buy - look at the available items in the shop.
 !buy permission <name> - buy a permission for <name>
-!buy punishment <name> - buy a punishment for <name>  (You can name yourself)
+!buy punishment <name> - buy a punishment for <name>
 !buy DomLv2 - upgrade your status in the room.
 !buy adulation - someone will make you feel appreciated.
 ` // end of description
@@ -474,7 +474,7 @@ function ChatRoomMessageDenialShop(SenderCharacter, msg, data) {
       if (msg.includes("!point") && customerList[SenderCharacter.MemberNumber].role.includes("dom")) {
         ServerSend("ChatRoomChat", { Content: "(Private) Points: " + customerList[SenderCharacter.MemberNumber].points, Type: "Chat", Target: SenderCharacter.MemberNumber} );
       } if ((msg.toLowerCase().includes("!buy") || msg.toLowerCase().includes("!shop")) && customerList[SenderCharacter.MemberNumber].role.includes("sub")) {
-        ServerSend("ChatRoomChat", { Content: "(Private) You want to buy somthing in my shop? Maybe a permission to orgmasm? Well I am sorry sweety, but only women I recognize as dominants can buy in my shop. Maybe you will be able to find one that will decide to play with you... Hihihi.", Type: "Chat", Target: SenderCharacter.MemberNumber} );
+        ServerSend("ChatRoomChat", { Content: "(Private) You want to buy something in my shop? Maybe a permission to orgasm? Well I am sorry sweety, but only women I recognize as dominants can buy in my shop. Maybe you will be able to find one that will decide to play with you... Hihihi.", Type: "Chat", Target: SenderCharacter.MemberNumber} );
       } if ((msg.toLowerCase().includes("!buy") || msg.toLowerCase().includes("!shop")) && customerList[SenderCharacter.MemberNumber].role.includes("dom")) {
         if (msg.toLowerCase().includes("permission")) {
           if (customerList[SenderCharacter.MemberNumber].points>=permissionCost) {

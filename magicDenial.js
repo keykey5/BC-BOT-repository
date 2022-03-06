@@ -170,7 +170,7 @@ function dollify(targetMemberNumber, mustKneel=false, mustStand = false) {
 	}
 }
 
-function dressLike(targetMemberNumber, dress = "doll", dressColor = "default", removeUnderwear = true, update = true) {
+function dressLike(targetMemberNumber, dress = "cat", dressColor = "default", removeUnderwear = true, update = true) {
 	for (var R = 0; R < ChatRoomCharacter.length; R++) {
 		if (ChatRoomCharacter[R].MemberNumber == targetMemberNumber) {
 
@@ -180,7 +180,7 @@ function dressLike(targetMemberNumber, dress = "doll", dressColor = "default", r
 			removeClothes(R, removeUnderwear)
 
 			// Get the hair color
-			if (dressColor == "hair" || dress == "doll" || dress == "talkingDoll") {
+			if (dressColor == "hair" || dress == "cat" || dress == "talkingDoll") {
 				for (var ii = 0; ii < ChatRoomCharacter[R].Appearance.length; ii++) {
 					if (ChatRoomCharacter[R].Appearance[ii].Asset.Group.Name == 'HairBack') {
 						dressColor = ChatRoomCharacter[R].Appearance[ii].Color
@@ -658,7 +658,7 @@ function ChatRoomMessageDenialRule(SenderCharacter, msg, data) {
         }
         if (customerList[SenderCharacter.MemberNumber].strike > 2) {
           ServerSend("ChatRoomChat", { Content: "Now you are going to be punished.", Type: "Chat"} );
-          dressLike(SenderCharacter.MemberNumber,"doll", update = false)
+          dressLike(SenderCharacter.MemberNumber,"cat", update = false)
           dollLock(SenderCharacter)
           customerRoleDildo(SenderCharacter, force = true)
           ChatRoomCharacterUpdate(SenderCharacter)
@@ -720,7 +720,7 @@ function enterLeaveEvent(sender,msg) {
 		if (sender.MemberNumber in customerList) {
 			ServerSend("ChatRoomChat", { Content: "Welcome back " + sender.Name + ". Don't worry I didn't forget about you. Hihihi.", Type: "Chat", Target: sender.MemberNumber} );
 			if (customerList[sender.MemberNumber].beingPunished) {
-				dressLike(sender.MemberNumber,"doll", update = false),
+				dressLike(sender.MemberNumber,"cat", update = false),
         dollLock(sender)
 				customerRoleDildo(sender, force = true)
 			} else {

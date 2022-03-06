@@ -633,9 +633,12 @@ function ChatRoomMessageDenialShop(SenderCharacter, msg, data) {
 function ChatRoomMessageDenialRule(SenderCharacter, msg, data) {
   if (data.Type != null && SenderCharacter.MemberNumber != Player.MemberNumber) {
     if ((data.Type == "Action")) {
-      // console.log("msg :" + msg)
-      // console.log("Keys :" + Object.keys(data.Dictionary))
-      // console.log("Dictionary 0 :" + data.Dictionary[0].MemberNumber)
+      //console.log("msg :" + msg)
+      //console.log("Keys :" + Object.keys(data.Dictionary))
+      //console.log("Dictionary 0 :" + data.Dictionary[0].MemberNumber)
+      for (let D = 0; D < data.Dictionary.length; D++) {
+       if (data.Dictionary[D].Automatic) return
+      }
       if ((msg.includes("Vibe") || msg.includes("Dildo") || msg.includes("Buttplug")) && (msg.includes("creaseTo-1") || ((msg.includes("creaseTo") || msg.includes("ModeChange")) && customerList[SenderCharacter.MemberNumber].role != "dom2"))) {
         ServerSend("ChatRoomChat", { Content: SenderCharacter.Name +"! Do not mess with the vibrators, you are not allowed to do that. This is a strike for you!", Type: "Chat"}); //Target: SenderCharacter.MemberNumber} );
         customerList[SenderCharacter.MemberNumber].strike = customerList[SenderCharacter.MemberNumber].strike +1
@@ -847,3 +850,9 @@ function adulationCheck(targetMemberNumber) {
     }
   }
 }
+
+
+
+//TODO Check vibe change correctly
+//
+//BondageClub/Scripts/VibratorMode.js line 715

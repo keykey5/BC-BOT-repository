@@ -778,7 +778,7 @@ function customerRoleDildo(sender, force = false) {
 function newCustomer(sender) {
 	customerList[sender.MemberNumber] = new personMagicData()
   customerList[sender.MemberNumber].name = sender.Name
-	if (OnlineReputationGet(sender,"Dominant")<50) {
+	if (OnlineReputationGet(sender,"Dominant")<=0) {
 		ServerSend("ChatRoomChat", { Content: sender.Name + ", a dildo and a chastity belt have been locked on you, have fun! But not too much or I will punish you.", Type: "Chat", Target:sender.MemberNumber} );
 		customerList[sender.MemberNumber].role ='sub1'
 	} else {

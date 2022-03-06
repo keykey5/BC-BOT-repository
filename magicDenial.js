@@ -170,7 +170,7 @@ function dollify(targetMemberNumber, mustKneel=false, mustStand = false) {
 	}
 }
 
-function dressLike(targetMemberNumber, dress = "doll", dressColor = "default", removeUnderwear = true, update = true) {
+function dressLike(targetMemberNumber, dress = "cat", dressColor = "default", removeUnderwear = true, update = true) {
 	for (var R = 0; R < ChatRoomCharacter.length; R++) {
 		if (ChatRoomCharacter[R].MemberNumber == targetMemberNumber) {
 
@@ -180,7 +180,7 @@ function dressLike(targetMemberNumber, dress = "doll", dressColor = "default", r
 			removeClothes(R, removeUnderwear)
 
 			// Get the hair color
-			if (dressColor == "hair" || dress == "doll" || dress == "talkingDoll") {
+			if (dressColor == "hair" || dress == "cat" || dress == "talkingDoll") {
 				for (var ii = 0; ii < ChatRoomCharacter[R].Appearance.length; ii++) {
 					if (ChatRoomCharacter[R].Appearance[ii].Asset.Group.Name == 'HairBack') {
 						dressColor = ChatRoomCharacter[R].Appearance[ii].Color
@@ -230,8 +230,8 @@ function dressLike(targetMemberNumber, dress = "doll", dressColor = "default", r
 
 
 			} else if (dress == "cow") {
-        //InventoryWear(ChatRoomCharacter[R], "CowPrintedBra","Bra")
-        InventoryWear(ChatRoomCharacter[R], "CowPrintedPanties","Panties")
+        		//InventoryWear(ChatRoomCharacter[R], "CowPrintedBra","Bra")
+        		InventoryWear(ChatRoomCharacter[R], "CowPrintedPanties","Panties")
 				InventoryWear(ChatRoomCharacter[R], "Horns2","HairAccessory1","#FFFFFF")
 				InventoryWear(ChatRoomCharacter[R], "LeatherArmbinder","ItemArms","default", 50)
 				InventoryWear(ChatRoomCharacter[R], "PonyBoots","Shoes")
@@ -255,7 +255,7 @@ function dressLike(targetMemberNumber, dress = "doll", dressColor = "default", r
 				//InventoryWear(ChatRoomCharacter[R], "ClothStuffing","ItemMouth")
 				InventoryWear(ChatRoomCharacter[R], "LeatherChoker","ItemNeck")
 				InventoryWear(ChatRoomCharacter[R], "CollarBell","ItemNeckAccessories")
-				//InventoryWear(ChatRoomCharacter[R], "HarnessBallGag","ItemMouth",dressColor)
+				InventoryWear(ChatRoomCharacter[R], "HarnessBallGag","ItemMouth",dressColor)
 				InventoryWear(ChatRoomCharacter[R], "Ears2","HairAccessory1",dressColor)
 
 			} else if (dress == "puppy" || dress == "dog") {
@@ -375,7 +375,7 @@ function getCharByName(name) {
 
 // System - Subs: you don't have permission to orgasm. Dom: have fun.
 //
-//
+// [BOT] Come play, chat. >>FREE GIFT<< for subs
 // -----------------------------------------------------------------------------
 
 
@@ -428,8 +428,9 @@ To be released from your dollification predicament you have to demonstrate your 
 SHOP:
 In the shop you will be able to buy the following items:
 - Orgasm permission (` + permissionCost + ` points): give this permission to whoever you want (yourself included) to allow them to have a nice orgasm! A nice reward for a good girl.
+- Punishment (` + punishmentCost + ` points): what more to say ^_^.
 - DomLv2 (` + DomLv2Cost + ` points): upgrade your status inside this bar, you will be given the authority to change the vibrators settings as you wish. But remember: turning them off is always prohibited!
-- Adulation (` + adulationCost + ` points): we want you to feel apprecciated while you are here. You will get some lovely attentions.
+- Adulation (` + adulationCost + ` points): we want you to feel appreciated while you are here. You will get some lovely attentions.
 ------------------------------------------------
 COMMANDS: all commands must be whispered.
 
@@ -440,8 +441,9 @@ Following commands are for dommes only.
 !shop - identical to !buy, read below.
 !buy - look at the available items in the shop.
 !buy permission <name> - buy a permission for <name>
+!buy punishment <name> - buy a punishment for <name>  (You can name yourself)
 !buy DomLv2 - upgrade your status in the room.
-!buy adulation - someone will make you feel apprecciated.
+!buy adulation - someone will make you feel appreciated.
 ` // end of description
 ServerSend("AccountUpdate", { Description: Player.Description });
 ChatRoomCharacterUpdate(Player)
@@ -498,7 +500,7 @@ function ChatRoomMessageDenialShop(SenderCharacter, msg, data) {
             for (var D = 0; D < ChatRoomCharacter.length; D++) {
               if (msg.toLowerCase().endsWith(ChatRoomCharacter[D].Name.toLowerCase())) {
                 if (ChatRoomCharacter[D]==Player) {
-                  ServerSend("ChatRoomChat", { Content: "Eheh, so you'd like to see me tied up? Soo nice of you. But my Mistress ordered me to manage this place... maybe another time?", Type: "Chat", Target: SenderCharacter.MemberNumber} );
+                  ServerSend("ChatRoomChat", { Content: "Eheh, so you'd like to see me tied up? So nice of you. But my Mistress ordered me to manage this place... maybe another time?", Type: "Chat", Target: SenderCharacter.MemberNumber} );
                   nameFound = true
                 } else {
                   console.log(SenderCharacter.Name + " bought punishment.")
@@ -533,7 +535,7 @@ function ChatRoomMessageDenialShop(SenderCharacter, msg, data) {
                 }
               }
               if (subList.length == 0) {
-                ServerSend("ChatRoomChat", { Content: "(Private) There are no available submissve customers at the moment. You cannot buy this item.", Type: "Chat", Target: SenderCharacter.MemberNumber} );
+                ServerSend("ChatRoomChat", { Content: "(Private) There are no available submissive customers at the moment. You cannot buy this item.", Type: "Chat", Target: SenderCharacter.MemberNumber} );
               } else {
                 customerList[SenderCharacter.MemberNumber].points -= adulationCost
                 const targetMemberNumber = subList[Math.floor(Math.random() * subList.length)]
@@ -550,7 +552,8 @@ function ChatRoomMessageDenialShop(SenderCharacter, msg, data) {
             Here is a list of available items:
             -----------------------------------
             Permission (`+permissionCost+` pt)
-            Adulation (`+adulationCost+` pt)`
+            Adulation (`+adulationCost+` pt)
+            Punishment (`+punishmentCost+` pt)`
 
             if (customerList[SenderCharacter.MemberNumber].role != "dom2") {
               mess = mess + `DomLv2 (change vibrator settings) (`+DomLv2Cost+` pt)` + nl
@@ -655,7 +658,7 @@ function ChatRoomMessageDenialRule(SenderCharacter, msg, data) {
         }
         if (customerList[SenderCharacter.MemberNumber].strike > 2) {
           ServerSend("ChatRoomChat", { Content: "Now you are going to be punished.", Type: "Chat"} );
-          dressLike(SenderCharacter.MemberNumber,"doll", update = false)
+          dressLike(SenderCharacter.MemberNumber,"cat", update = false)
           dollLock(SenderCharacter)
           customerRoleDildo(SenderCharacter, force = true)
           ChatRoomCharacterUpdate(SenderCharacter)
@@ -694,7 +697,7 @@ function ChatRoomMessageDenialRule(SenderCharacter, msg, data) {
 
 function enterLeaveEvent(sender,msg) {
   //if (InventoryAllow(sender, "AccessBreast") || InventoryAllow(sender, "AccessVulva") || sender.IsRestrained() || CharacterIsInUnderwear(sender) || sender.IsShackled() || sender.IsBlind() || !sender.CanTalk() || sender.IsEnclose() || sender.IsMounted() || sender.IsDeaf()) {
-  //  ServerSend("ChatRoomChat", { Content: "*[To play here you have to be UNRESTRAINED and fully DRESSED (check your pantinies too). You will be kicked in 10 seconds. You can change and comeback if you want.]", Type: "Emote", Target: sender.MemberNumber} );
+  //  ServerSend("ChatRoomChat", { Content: "*[To play here you have to be UNRESTRAINED and fully DRESSED (check your panties too). You will be kicked in 10 seconds. You can change and comeback if you want.]", Type: "Emote", Target: sender.MemberNumber} );
   //  setTimeout(function(sender) {ChatRoomAdminChatAction("Kick", sender.MemberNumber.toString())}, 10*1000, sender)
   if (sender.ItemPermission>2) {
     ServerSend("ChatRoomChat", { Content: "*[To play here you have to lower your PERMISSION. You will be kicked in 10 seconds. You can change and comeback if you want.]", Type: "Emote", Target: sender.MemberNumber} );
@@ -712,12 +715,12 @@ function enterLeaveEvent(sender,msg) {
     ServerSend("ChatRoomChat", { Content: "*[To play here you have to set the preference for sexual the activities to hybrid or automatic (locked). You will be kicked in 10 seconds. You can change and comeback if you want.]", Type: "Emote", Target: sender.MemberNumber} );
     setTimeout(function(sender) {ChatRoomAdminChatAction("Kick", sender.MemberNumber.toString())}, 10*1000, sender)
   } else {
-		ServerSend("ChatRoomChat", { Content: "*[ROOM EXPLANATION: orgasm are prohibited. More info in " + Player.Name + " Bio. READ IT]", Type: "Emote", Target: sender.MemberNumber} );
+		ServerSend("ChatRoomChat", { Content: "*[ROOM EXPLANATION: orgasms are prohibited. More info in " + Player.Name + " Bio. READ IT]", Type: "Emote", Target: sender.MemberNumber} );
 		ServerSend("ChatRoomChat", { Content: "*[Say or whisper '!leave' and all the locks on you will be unlocked, but you will also be kicked out.]", Type: "Emote", Target: sender.MemberNumber} );
 		if (sender.MemberNumber in customerList) {
 			ServerSend("ChatRoomChat", { Content: "Welcome back " + sender.Name + ". Don't worry I didn't forget about you. Hihihi.", Type: "Chat", Target: sender.MemberNumber} );
 			if (customerList[sender.MemberNumber].beingPunished) {
-				dressLike(sender.MemberNumber,"doll", update = false),
+				dressLike(sender.MemberNumber,"cat", update = false),
         dollLock(sender)
 				customerRoleDildo(sender, force = true)
 			} else {
@@ -779,12 +782,12 @@ function newCustomer(sender) {
 		ServerSend("ChatRoomChat", { Content: sender.Name + ", a dildo and a chastity belt have been locked on you, have fun! But not too much or I will punish you.", Type: "Chat", Target:sender.MemberNumber} );
 		customerList[sender.MemberNumber].role ='sub1'
 	} else {
-		ServerSend("ChatRoomChat", { Content: "Greetings " +sender.Name + ", welcome to my special shop. You have now the possiblity to earn !points by... arousing other girls here. Then you will be able to use those point to !buy some of our particular offers. Just remember that I will not award any points if you rush too much. Just take the time to play and arouse these nice girls.", Type: "Chat", Target:sender.MemberNumber} );
+		ServerSend("ChatRoomChat", { Content: "Greetings " +sender.Name + ", welcome to my special shop. You have now the possibility to earn !points by... arousing other girls here. Then you will be able to use those point to !buy some of our particular offers. Just remember that I will not award any points if you rush too much. Just take the time to play and arouse these nice girls.", Type: "Chat", Target:sender.MemberNumber} );
 		customerList[sender.MemberNumber].role = 'dom'
     customerList[sender.MemberNumber].points = 5
 	}
 	if (OnlineReputationGet(sender,"Dominant")<=-50) {
-		ServerSend("ChatRoomChat", { Content: "Also, since you seems very submissive to me, I have decided to give you something else you may appreciate. A second vibrating dildo. Hihihi.", Type: "Chat", Target:sender.MemberNumber} );
+		ServerSend("ChatRoomChat", { Content: "Also, since you seem very submissive to me, I have decided to give you something else you may appreciate. A second vibrating dildo. Hihihi.", Type: "Chat", Target:sender.MemberNumber} );
 		customerList[sender.MemberNumber].role = 'sub2'
 	}
 	customerRoleDildo(sender)
@@ -820,7 +823,7 @@ function promoteToDom2(sender) {
 }
 
 function buyPunishment(SenderCharacter, targetCharacter) {
-  ServerSend("ChatRoomChat", { Content: "Oh " + targetCharacter.Name + ", seems that "+SenderCharacter.Name+" would really enjoy to see you in our puishment outfit. And since she is a paying customer... Let her enjoy your struggles.", Type: "Chat"} );
+  ServerSend("ChatRoomChat", { Content: "Oh " + targetCharacter.Name + ", seems that "+SenderCharacter.Name+" would really enjoy to see you in our punishment outfit. And since she is a paying customer... Let her enjoy your struggles.", Type: "Chat"} );
   dressLike(targetCharacter.MemberNumber,"doll", update = false)
   dollLock(targetCharacter)
   customerRoleDildo(targetCharacter, force = true)

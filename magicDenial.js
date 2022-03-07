@@ -671,7 +671,11 @@ function ChatRoomMessageDenialRule(SenderCharacter, msg, data) {
       }
       //
     } else if ((data.Type == "Activity")) {
-      if (msg.includes("OrgasmResist")) {
+      // console.log(msg)
+      // OrgasmFailResist  OrgasmResist   							count as resisted
+      // OrgasmFailPassive OrgasmFailSurrender OrgasmFailTimeout 	count as failed even if OrgasmFailTimeout can get pretty hard when ruin gets high
+      // 🌹 ❤ 🐇
+      if (msg.startsWith("OrgasmResist") || msg.startsWith("OrgasmFailResist")) {
         if (customerList[SenderCharacter.MemberNumber].beingPunished) {
           customerList[SenderCharacter.MemberNumber].orgasmResisted = customerList[SenderCharacter.MemberNumber].orgasmResisted + 1
           if (customerList[SenderCharacter.MemberNumber].orgasmResisted >= 2) {
@@ -738,7 +742,7 @@ function enterLeaveEvent(sender,msg) {
 }
 
 function orgasmReaction(sender) {
-	if (customerList[sender.MemberNumber].strike <= 2) {
+	if (customerList[sender.MemberNumber].strike < 2) {
 		ServerSend("ChatRoomChat", { Content: sender.Name + ", you had an orgasm without permission. I am kind, but at the third strike I WILL punish you.", Type: "Chat", Target: sender.MemberNumber} );
 		customerList[sender.MemberNumber].strike = customerList[sender.MemberNumber].strike + 1
 	} else {

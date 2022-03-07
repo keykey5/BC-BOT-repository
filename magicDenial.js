@@ -766,7 +766,8 @@ function customerRoleDildo(sender, force = false) {
 	if (role == "sub2") {
 		//console.log(sender.Name + "sub2 IF")
 		InventoryWear(sender, "VibratingButtplug","ItemButt","Default")
-		InventoryGet(sender,"ItemButt").Property = { Intensity: customerList[sender.MemberNumber].buttIntensity, Effect: ["Egged","Vibrating"] }
+		InventoryGet(sender,"ItemButt").Property = { "Intensity":customerList[sender.MemberNumber].buttIntensity,"Effect": ["Egged","Vibrating"],"Mode":"Medium"}
+		//{"Intensity":1,"Effect":["Egged","Vibrating"],"Mode":"Medium"}
 		//InventoryGet(sender,"ItemButt").Asset.Effect = []
 	}
 	if (role.includes("sub") || force) {

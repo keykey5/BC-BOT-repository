@@ -198,27 +198,22 @@ function dressLike(targetMemberNumber, dress = "doll", dressColor = "default", r
 				removeRestrains(R)
 
 				// Restrain
-				//InventoryWear(ChatRoomCharacter[R], "LatexSkirt2","BodyLower",dressColor) //ass
-				//InventoryWear(ChatRoomCharacter[R], "Catsuit","Suit",baseBlack)
-				//InventoryWear(ChatRoomCharacter[R], "Catsuit","SuitLower",baseBlack)
-				//InventoryWear(ChatRoomCharacter[R], "LatexSkirt2","BodyLower",dressColor) // nipple
-				InventoryWear(ChatRoomCharacter[R], "LatexSocks1","Socks",dressColor)
-				InventoryWear(ChatRoomCharacter[R], "LatexCorset1","Bra",dressColor)
-				InventoryWear(ChatRoomCharacter[R], "ThighHighLatexHeels","ItemBoots",dressColor)
-				//InventoryWear(ChatRoomCharacter[R], "Catsuit","Gloves",dressColor)
-				InventoryWear(ChatRoomCharacter[R], "BoxTieArmbinder","ItemArms",dressColor,100)
-				//InventoryWear(ChatRoomCharacter[R], "LatexSkirt2","BodyLower",dressColor) //ItemHands
-        if (dress != "talkingDoll") {
-  				InventoryWear(ChatRoomCharacter[R], "ClothStuffing","ItemMouth",dressColor)
-  				InventoryWear(ChatRoomCharacter[R], "HarnessPanelGag","ItemMouth2",dressColor)
-  				InventoryWear(ChatRoomCharacter[R], "LatexPostureCollar","ItemMouth3",dressColor)
-        }
-				InventoryWear(ChatRoomCharacter[R], "LatexBlindfold","ItemHead",dressColor)
-				InventoryWear(ChatRoomCharacter[R], "LatexSkirt1","ClothLower",dressColor)
-
-				InventoryWear(ChatRoomCharacter[R], "SpreaderMetal","ItemFeet",dressColor)
-				//InventoryWear(ChatRoomCharacter[R], "LeatherLegCuffs","ItemFeet",dressColor)
-
+								// Restrain
+                				//{"Group":"ItemLegs","Name":"SeamlessHobbleSkirt","Color":"#222222","Difficulty":24
+                InventoryWear(ChatRoomCharacter[R], "SeamlessHobbleSkirt","ItemLegs",dressColor,24)
+                				//{"Group":"ItemBoots","Name":"BalletWedges","Color":"Default","Difficulty":16
+                InventoryWear(ChatRoomCharacter[R], "BalletWedges","ItemBoots",dressColor,16)
+                                //{"Group":"ItemMouth","Name":"DeepthroatGag","Color":"#404040","Difficulty":15
+                InventoryWear(ChatRoomCharacter[R], "DeepthroatGag","ItemMouth",dressColor,15)
+                                //{"Group":"ItemMouth2","Name":"HarnessPanelGag","Color":"#404040","Difficulty":16
+                InventoryWear(ChatRoomCharacter[R], "HarnessPanelGag","ItemMouth2",dressColor,16)
+                                //{"Group":"ItemMouth3","Name":"StitchedMuzzleGag","Color":"Default","Difficulty":15
+                InventoryWear(ChatRoomCharacter[R], "StitchedMuzzleGag","ItemMouth3",dressColor,15)
+                                //{"Group":"ItemArms","Name":"ArmbinderJacket","Color":["#B23E46","#0A0A0A","Default"],"Difficulty":22
+                InventoryWear(ChatRoomCharacter[R], "ArmbinderJacket","ItemArms",[dressColor,"#0A0A0A","Default"],22)
+                                //{"Group":"ItemHood","Name":"KirugumiMask","Color":["#9A7F76","Default","Default","#cc33cc"],"Difficulty":25,"Property":{"Type":"e2m3b1br0op2ms0","Difficulty":15,"Block":["ItemMouth","ItemMouth2","ItemMouth3","ItemHead","ItemNose","ItemEars"],"Effect":["BlindHeavy","Prone","BlockMouth"],"Hide":["Glasses","ItemMouth","ItemMouth2","ItemMouth3","Mask","ItemHead"],"HideItem":["ItemHeadSnorkel"]}}]
+                InventoryWear(ChatRoomCharacter[R], "KirugumiMask","ItemHood",["#9A7F76","Default","Default",dressColor],25)
+                InventoryGet(ChatRoomCharacter[R], "ItemHood").Property = {"Type":"e2m3b1br0op2ms0","Difficulty":15,"Effect":["BlindHeavy","Prone","BlockMouth"],"Hide":["Glasses","ItemMouth","ItemMouth2","ItemMouth3","Mask","ItemHead"],"HideItem":["ItemHeadSnorkel"]}
 
 			} else if (dress == "maid") {
 				InventoryWear(ChatRoomCharacter[R], "Socks5","Socks","#d2d2d2")
@@ -227,7 +222,6 @@ function dressLike(targetMemberNumber, dress = "doll", dressColor = "default", r
 				InventoryWear(ChatRoomCharacter[R], "FrillyApron","ClothAccessory")
 				InventoryWear(ChatRoomCharacter[R], "MaidHairband1","Hat")
 				InventoryWear(ChatRoomCharacter[R], "MaidCollar","ItemNeck")
-
 
 			} else if (dress == "cow") {
         		//InventoryWear(ChatRoomCharacter[R], "CowPrintedBra","Bra")

@@ -199,6 +199,7 @@ function dressLike(targetMemberNumber, dress = "doll", dressColor = "default", r
 
 				// Restrain
 								// Restrain
+				InventoryWear(ChatRoomCharacter[R], "Irish8Cuffs","ItemFeet",dressColor,24)
                 				//{"Group":"ItemLegs","Name":"SeamlessHobbleSkirt","Color":"#222222","Difficulty":24
                 InventoryWear(ChatRoomCharacter[R], "SeamlessHobbleSkirt","ItemLegs",dressColor,24)
                 				//{"Group":"ItemBoots","Name":"BalletWedges","Color":"Default","Difficulty":16
@@ -809,8 +810,8 @@ function dollLock(sender) {
   var assetLock = AssetGet("Female3DCG", "ItemMisc", "CombinationPadlock")
   InventoryLock(sender, InventoryGet(sender, "ItemArms"), { Asset: assetLock})
   InventoryGet(sender, "ItemArms").Property.CombinationNumber = customerList[sender.MemberNumber].lockCode
-  InventoryLock(sender, InventoryGet(sender, "ItemHead"), { Asset: assetLock})
-  InventoryGet(sender, "ItemHead").Property.CombinationNumber = customerList[sender.MemberNumber].lockCode
+  InventoryLock(sender, InventoryGet(sender, "ItemHood"), { Asset: assetLock})
+  InventoryGet(sender, "ItemHood").Property.CombinationNumber = customerList[sender.MemberNumber].lockCode
   InventoryLock(sender, InventoryGet(sender, "ItemMouth3"), { Asset: assetLock})
   InventoryGet(sender, "ItemMouth3").Property.CombinationNumber = customerList[sender.MemberNumber].lockCode
 }
@@ -855,3 +856,7 @@ function adulationCheck(targetMemberNumber) {
 //TODO Check vibe change correctly
 //
 //BondageClub/Scripts/VibratorMode.js line 715
+
+//add vibes to dolly if punishment
+//add irish cuffs on dolly
+//

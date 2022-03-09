@@ -135,6 +135,7 @@ function removeRestrains(target){
 	InventoryRemove(ChatRoomCharacter[target],"ItemPelvis")
 	InventoryRemove(ChatRoomCharacter[target],"ItemHead")
 	InventoryRemove(ChatRoomCharacter[target],"ItemDevices")
+	InventoryRemove(ChatRoomCharacter[target],"ItemHood")
 }
 
 function removeClothes(target, removeUnderwear = true){
@@ -146,6 +147,7 @@ function removeClothes(target, removeUnderwear = true){
 	InventoryRemove(ChatRoomCharacter[target],"Gloves")
 	InventoryRemove(ChatRoomCharacter[target],"Shoes")
 	InventoryRemove(ChatRoomCharacter[target],"Hat")
+	InventoryRemove(ChatRoomCharacter[target],"Corset")
 	if (removeUnderwear) {
 		InventoryRemove(ChatRoomCharacter[target],"Socks")
 		InventoryRemove(ChatRoomCharacter[target],"Bra")
@@ -463,7 +465,7 @@ function ChatRoomMessageEnterLeave(SenderCharacter, msg, data) {
 }
 
 function ChatRoomMessageDenialShop(SenderCharacter, msg, data) {
-  if (data.Type != null && SenderCharacter.MemberNumber != Player.MemberNumber) {
+  if (data.Type != null && SenderCharacter.MemberNumber != Player.MemberNumber && customerList[SenderCharacter.MemberNumber] != null) {
 
     if ((data.Type == "Chat") || (data.Type == "Whisper")) {
       if (msg.includes("!point") && customerList[SenderCharacter.MemberNumber].role.includes("dom")) {
@@ -572,7 +574,7 @@ function ChatRoomMessageDenialShop(SenderCharacter, msg, data) {
               }
             }
             if (TargetMemberNumber != null) {
-              if (customerList[TargetMemberNumber].beingPunished || !customerList[TargetMemberNumber].role.includes("sub")) {
+              if (customerList[TargetMemberNumber] == null || customerList[TargetMemberNumber].beingPunished || !customerList[TargetMemberNumber].role.includes("sub")) {
                 ServerSend("ChatRoomChat", { Content: "(Private) Sorry, but no points will be awarded to arouse non-submissive girls or girls being punished. Still, feel free to enjoy them!", Type: "Chat", Target: SenderCharacter.MemberNumber} );
               } else {
                 for (var D = 0; D < ChatRoomCharacter.length; D++) {
@@ -626,7 +628,7 @@ function ChatRoomMessageDenialShop(SenderCharacter, msg, data) {
 }
 
 function ChatRoomMessageDenialRule(SenderCharacter, msg, data) {
-  if (data.Type != null && SenderCharacter.MemberNumber != Player.MemberNumber) {
+  if (data.Type != null && SenderCharacter.MemberNumber != Player.MemberNumber && customerList[SenderCharacter.MemberNumber] != null) {
     if ((data.Type == "Action")) {
       //console.log("msg :" + msg)
       //console.log("Keys :" + Object.keys(data.Dictionary))
@@ -814,6 +816,12 @@ function dollLock(sender) {
   InventoryGet(sender, "ItemHood").Property.CombinationNumber = customerList[sender.MemberNumber].lockCode
   InventoryLock(sender, InventoryGet(sender, "ItemMouth3"), { Asset: assetLock})
   InventoryGet(sender, "ItemMouth3").Property.CombinationNumber = customerList[sender.MemberNumber].lockCode
+  InventoryLock(sender, InventoryGet(sender, "ItemFeet"), { Asset: assetLock})
+  InventoryGet(sender, "ItemFeet").Property.CombinationNumber = customerList[sender.MemberNumber].lockCode
+  InventoryLock(sender, InventoryGet(sender, "ItemLegs"), { Asset: assetLock})
+  InventoryGet(sender, "ItemLegs").Property.CombinationNumber = customerList[sender.MemberNumber].lockCode
+  InventoryLock(sender, InventoryGet(sender, "ItemBoots"), { Asset: assetLock})
+  InventoryGet(sender, "ItemBoots").Property.CombinationNumber = customerList[sender.MemberNumber].lockCode
 }
 
 function promoteToDom2(sender) {
@@ -860,3 +868,4 @@ function adulationCheck(targetMemberNumber) {
 //add vibes to dolly if punishment
 //add irish cuffs on dolly
 //
+//free doesn't remove mask

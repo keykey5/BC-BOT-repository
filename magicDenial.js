@@ -128,6 +128,7 @@ function removeRestrains(target){
 	InventoryRemove(ChatRoomCharacter[target],"ItemMouth2")
 	InventoryRemove(ChatRoomCharacter[target],"ItemMouth3")
 	InventoryRemove(ChatRoomCharacter[target],"ItemTorso")
+	InventoryRemove(ChatRoomCharacter[target],"ItemBreast")
 	InventoryRemove(ChatRoomCharacter[target],"ItemLegs")
 	InventoryRemove(ChatRoomCharacter[target],"ItemFeet")
 	InventoryRemove(ChatRoomCharacter[target],"ItemBoots")

@@ -111,8 +111,10 @@ if (typeof customerList === 'undefined') {
 
 function freeAll() {
 	for (var R = 0; R < ChatRoomCharacter.length; R++) {
-		removeRestrains(R)
-		reapplyClothing(ChatRoomCharacter[R])
+		if (!ChatRoomCharacter[target].IsOwnedByMemberNumber(54070) && ChatRoomCharacter[target].MemberNumber !== 54070 && ChatRoomCharacter[target].MemberNumber !== 61722) {
+			removeRestrains(R)
+        	reapplyClothing(ChatRoomCharacter[R])
+		}
 		ChatRoomCharacterUpdate(ChatRoomCharacter[R])
 	}
 	ServerSend("ChatRoomChat", { Content: "*Everyone has been freed.", Type: "Emote"} );
@@ -123,7 +125,9 @@ function removeRestrains(target){
 	InventoryRemove(ChatRoomCharacter[target],"ItemButt")
 	InventoryRemove(ChatRoomCharacter[target],"ItemArms")
 	InventoryRemove(ChatRoomCharacter[target],"ItemHands")
-	InventoryRemove(ChatRoomCharacter[target],"ItemNeck")
+	if (!ChatRoomCharacter[target].IsOwnedByMemberNumber(54070) && ChatRoomCharacter[target].MemberNumber !== 54070 && ChatRoomCharacter[target].MemberNumber !== 61722) {
+		InventoryRemove(ChatRoomCharacter[target],"ItemNeck")
+	}
 	InventoryRemove(ChatRoomCharacter[target],"ItemMouth")
 	InventoryRemove(ChatRoomCharacter[target],"ItemMouth2")
 	InventoryRemove(ChatRoomCharacter[target],"ItemMouth3")

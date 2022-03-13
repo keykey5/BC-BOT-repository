@@ -111,7 +111,7 @@ if (typeof customerList === 'undefined') {
 
 function freeAll() {
 	for (var R = 0; R < ChatRoomCharacter.length; R++) {
-		if (!ChatRoomCharacter[target].IsOwnedByMemberNumber(54070) && ChatRoomCharacter[target].MemberNumber !== 54070 && ChatRoomCharacter[target].MemberNumber !== 61722) {
+		if (!ChatRoomCharacter[target].IsOwnedByMemberNumber(Player.MemberNumber) && ChatRoomCharacter[target].MemberNumber !== Player.MemberNumber && !ChatRoomCharacter[target].IsLoverOfPlayer(Player.MemberNumber)) {
 			removeRestrains(R)
         	reapplyClothing(ChatRoomCharacter[R])
 		}
@@ -125,7 +125,7 @@ function removeRestrains(target){
 	InventoryRemove(ChatRoomCharacter[target],"ItemButt")
 	InventoryRemove(ChatRoomCharacter[target],"ItemArms")
 	InventoryRemove(ChatRoomCharacter[target],"ItemHands")
-	if (!ChatRoomCharacter[target].IsOwnedByMemberNumber(54070) && ChatRoomCharacter[target].MemberNumber !== 54070 && ChatRoomCharacter[target].MemberNumber !== 61722) {
+	if (!ChatRoomCharacter[target].IsOwnedByMemberNumber(Player.MemberNumber) && ChatRoomCharacter[target].MemberNumber !== Player.MemberNumber && !ChatRoomCharacter[target].IsLoverOfPlayer(Player.MemberNumber)) {
 		InventoryRemove(ChatRoomCharacter[target],"ItemNeck")
 	}
 	InventoryRemove(ChatRoomCharacter[target],"ItemMouth")

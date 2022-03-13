@@ -189,7 +189,7 @@ function dressLike(targetMemberNumber, dress = "doll", dressColor = "default", r
 			// Get the hair color
 			if (dressColor == "hair" || dress == "doll" || dress == "talkingDoll") {
 				for (var ii = 0; ii < ChatRoomCharacter[R].Appearance.length; ii++) {
-					if (ChatRoomCharacter[R].Appearance[ii].Asset.Group.Name == 'HairBack') {
+					if (ChatRoomCharacter[R].Appearance[ii].Asset.Group.Name == 'HairFront') {
 						dressColor = ChatRoomCharacter[R].Appearance[ii].Color
 						break;
 					}

@@ -589,7 +589,7 @@ function ChatRoomMessageDenialShop(SenderCharacter, msg, data) {
                 if (data.Dictionary[D].Tag == "ActivityGroup") ActivityGroup = data.Dictionary[D].Text;
               }
             }
-            if (TargetMemberNumber != null) {
+            if (TargetMemberNumber != null && TargetMemberNumber != SenderCharacter.MemberNumber) {
               if (customerList[TargetMemberNumber] == null || customerList[TargetMemberNumber].beingPunished || !customerList[TargetMemberNumber].role.includes("sub")) {
                 ServerSend("ChatRoomChat", { Content: "(Private) Sorry, but no points will be awarded to arouse non-submissive girls or girls being punished. Still, feel free to enjoy them!", Type: "Chat", Target: SenderCharacter.MemberNumber} );
               } else {

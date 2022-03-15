@@ -190,7 +190,15 @@ function dressLike(targetMemberNumber, dress = "doll", dressColor = "default", r
 			if (dressColor == "hair" || dress == "doll" || dress == "talkingDoll") {
 				for (var ii = 0; ii < ChatRoomCharacter[R].Appearance.length; ii++) {
 					if (ChatRoomCharacter[R].Appearance[ii].Asset.Group.Name == 'HairFront') {
-						dressColor = ChatRoomCharacter[R].Appearance[ii].Color
+						//dressColor = ChatRoomCharacter[R].Appearance[ii].Color
+
+						if (ChatRoomCharacter[R].Appearance[ii].Color.constructor === Array) {
+                        	dressColor = ChatRoomCharacter[R].Appearance[ii].Color[0]
+                        } else {
+                        	dressColor = ChatRoomCharacter[R].Appearance[ii].Color
+                        }
+
+
 						break;
 					}
 				}
@@ -219,9 +227,12 @@ function dressLike(targetMemberNumber, dress = "doll", dressColor = "default", r
                 InventoryWear(ChatRoomCharacter[R], "StitchedMuzzleGag","ItemMouth3",dressColor,15)
                                 //{"Group":"ItemArms","Name":"ArmbinderJacket","Color":["#B23E46","#0A0A0A","Default"],"Difficulty":22
                 InventoryWear(ChatRoomCharacter[R], "ArmbinderJacket","ItemArms",[dressColor,"#0A0A0A","Default"],22)
+                console.log(ChatRoomCharacter[R].MemberNumber + " - Arms - " + InventoryGet(ChatRoomCharacter[R], "ItemArms").Color)
                                 //{"Group":"ItemHood","Name":"KirugumiMask","Color":["#9A7F76","Default","Default","#cc33cc"],"Difficulty":25,"Property":{"Type":"e2m3b1br0op2ms0","Difficulty":15,"Block":["ItemMouth","ItemMouth2","ItemMouth3","ItemHead","ItemNose","ItemEars"],"Effect":["BlindHeavy","Prone","BlockMouth"],"Hide":["Glasses","ItemMouth","ItemMouth2","ItemMouth3","Mask","ItemHead"],"HideItem":["ItemHeadSnorkel"]}}]
                 InventoryWear(ChatRoomCharacter[R], "KirugumiMask","ItemHood",["#9A7F76","Default","Default",dressColor],25)
+                console.log(ChatRoomCharacter[R].MemberNumber + " - Hood - " + InventoryGet(ChatRoomCharacter[R], "ItemHood").Color)
                 InventoryGet(ChatRoomCharacter[R], "ItemHood").Property = {"Type":"e2m3b1br0op2ms0","Difficulty":15,"Effect":["BlindHeavy","Prone","BlockMouth"],"Hide":["Glasses","ItemMouth","ItemMouth2","ItemMouth3","Mask","ItemHead"],"HideItem":["ItemHeadSnorkel"]}
+
 
 			} else if (dress == "maid") {
 				InventoryWear(ChatRoomCharacter[R], "Socks5","Socks","#d2d2d2")
@@ -869,8 +880,10 @@ function adulationCheck(targetMemberNumber) {
 //TODO Check vibe change correctly
 //
 //BondageClub/Scripts/VibratorMode.js line 715
-
-//add vibes to dolly if punishment
-//add irish cuffs on dolly
 //
-//free doesn't remove mask
+//apparently bot removes love locks for non lovers of bot... hmmmm
+//↩️Gwen: (Well I came in here with a lovers locked training belt and now don't have it
+//it borks only with the training belt... other belts stay locked
+
+
+

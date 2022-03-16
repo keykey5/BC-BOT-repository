@@ -213,7 +213,6 @@ function dressLike(targetMemberNumber, dress = "doll", dressColor = "default", r
 				removeRestrains(R)
 
 				// Restrain
-								// Restrain
 				InventoryWear(ChatRoomCharacter[R], "Irish8Cuffs","ItemFeet",dressColor,24)
                 				//{"Group":"ItemLegs","Name":"SeamlessHobbleSkirt","Color":"#222222","Difficulty":24
                 InventoryWear(ChatRoomCharacter[R], "SeamlessHobbleSkirt","ItemLegs",dressColor,24)
@@ -227,10 +226,10 @@ function dressLike(targetMemberNumber, dress = "doll", dressColor = "default", r
                 InventoryWear(ChatRoomCharacter[R], "StitchedMuzzleGag","ItemMouth3",dressColor,15)
                                 //{"Group":"ItemArms","Name":"ArmbinderJacket","Color":["#B23E46","#0A0A0A","Default"],"Difficulty":22
                 InventoryWear(ChatRoomCharacter[R], "ArmbinderJacket","ItemArms",[dressColor,"#0A0A0A","Default"],22)
-                console.log(ChatRoomCharacter[R].MemberNumber + " - Arms - " + InventoryGet(ChatRoomCharacter[R], "ItemArms").Color)
+                //console.log(ChatRoomCharacter[R].MemberNumber + " - Arms - " + InventoryGet(ChatRoomCharacter[R], "ItemArms").Color)
                                 //{"Group":"ItemHood","Name":"KirugumiMask","Color":["#9A7F76","Default","Default","#cc33cc"],"Difficulty":25,"Property":{"Type":"e2m3b1br0op2ms0","Difficulty":15,"Block":["ItemMouth","ItemMouth2","ItemMouth3","ItemHead","ItemNose","ItemEars"],"Effect":["BlindHeavy","Prone","BlockMouth"],"Hide":["Glasses","ItemMouth","ItemMouth2","ItemMouth3","Mask","ItemHead"],"HideItem":["ItemHeadSnorkel"]}}]
                 InventoryWear(ChatRoomCharacter[R], "KirugumiMask","ItemHood",["#9A7F76","Default","Default",dressColor],25)
-                console.log(ChatRoomCharacter[R].MemberNumber + " - Hood - " + InventoryGet(ChatRoomCharacter[R], "ItemHood").Color)
+                //console.log(ChatRoomCharacter[R].MemberNumber + " - Hood - " + InventoryGet(ChatRoomCharacter[R], "ItemHood").Color)
                 InventoryGet(ChatRoomCharacter[R], "ItemHood").Property = {"Type":"e2m3b1br0op2ms0","Difficulty":15,"Effect":["BlindHeavy","Prone","BlockMouth"],"Hide":["Glasses","ItemMouth","ItemMouth2","ItemMouth3","Mask","ItemHead"],"HideItem":["ItemHeadSnorkel"]}
 
 
@@ -722,11 +721,12 @@ function enterLeaveEvent(sender,msg) {
   if (sender.ItemPermission>2) {
     ServerSend("ChatRoomChat", { Content: "*[To play here you have to lower your PERMISSION. You will be kicked in 10 seconds. You can change and comeback if you want.]", Type: "Emote", Target: sender.MemberNumber} );
     setTimeout(function(sender) {ChatRoomAdminChatAction("Kick", sender.MemberNumber.toString())}, 10*1000, sender)
-  } else if (InventoryIsPermissionBlocked(sender, "SmallWoodenBox","ItemDevices") || InventoryIsPermissionBlocked(sender, "LowCage","ItemDevices")) {
-    ServerSend("ChatRoomChat", { Content: "*[To play here you have to give PERMISSION to use the SMALL WOODEN BOX and the KENNEL. You will be kicked in 10 seconds. You can change and comeback if you want.]", Type: "Emote", Target: sender.MemberNumber} );
-    setTimeout(function(sender) {ChatRoomAdminChatAction("Kick", sender.MemberNumber.toString())}, 10*1000, sender)
-  } else if (InventoryIsPermissionBlocked(sender, "BoxTieArmbinder","ItemArms") || InventoryIsPermissionBlocked(sender, "ClothStuffing","ItemMouth") || InventoryIsPermissionBlocked(sender, "HarnessPanelGag","ItemMouth2") || InventoryIsPermissionBlocked(sender, "LatexPostureCollar","ItemMouth3") || InventoryIsPermissionBlocked(sender, "LatexBlindfold","ItemHead") || InventoryIsPermissionBlocked(sender, "SpreaderMetal","ItemFeet")) {
-    ServerSend("ChatRoomChat", { Content: "*[To play here you have to give PERMISSION to use the BOX TIE ARMBINDER, the CLOTH STUFFING, the HARNESS PANEL GAG, the LATEX POSTURE COLLAR, the LATEX BLINDFOLD and the SPREADER METAL BAR. You will be kicked in 10 seconds. You can change and comeback if you want.]", Type: "Emote", Target: sender.MemberNumber} );
+  //TODO Check if combo lock is blocked !!
+  //} else if (InventoryIsPermissionBlocked(sender, "SmallWoodenBox","ItemDevices") || InventoryIsPermissionBlocked(sender, "LowCage","ItemDevices")) {
+  //  ServerSend("ChatRoomChat", { Content: "*[To play here you have to give PERMISSION to use the SMALL WOODEN BOX and the KENNEL. You will be kicked in 10 seconds. You can change and comeback if you want.]", Type: "Emote", Target: sender.MemberNumber} );
+  //  setTimeout(function(sender) {ChatRoomAdminChatAction("Kick", sender.MemberNumber.toString())}, 10*1000, sender)
+  } else if (InventoryIsPermissionBlocked(sender, "Irish8Cuffs","ItemFeet") || InventoryIsPermissionBlocked(sender, "SeamlessHobbleSkirt","ItemLegs") || InventoryIsPermissionBlocked(sender, "BalletWedges","ItemBoots") || InventoryIsPermissionBlocked(sender, "DeepthroatGag","ItemMouth") || InventoryIsPermissionBlocked(sender, "HarnessPanelGag","ItemMouth2") || InventoryIsPermissionBlocked(sender, "StitchedMuzzleGag","ItemMouth3") || InventoryIsPermissionBlocked(sender, "ArmbinderJacket","ItemArms") || InventoryIsPermissionBlocked(sender, "KirugumiMask","ItemHood")) {
+    ServerSend("ChatRoomChat", { Content: "*[To play here you have to give PERMISSION to use the ARMBINDER JACKET, the KIRUGUMI MASK, the SEAMLESS HOBBLE SKIRT, the DEEPTHROAT PENIS GAG, the HARNESS PANEL GAG, the STITCHED MUZZLE GAG, the BALLET WEDGES and the IRISH 8 CUFFS. You will be kicked in 10 seconds. You can change and comeback if you want.]", Type: "Emote", Target: sender.MemberNumber} );
     setTimeout(function(sender) {ChatRoomAdminChatAction("Kick", sender.MemberNumber.toString())}, 10*1000, sender)
 	} else if (InventoryIsPermissionBlocked(sender, "PolishedChastityBelt","ItemPelvis") || InventoryIsPermissionBlocked(sender, "VibratingDildo","ItemVulva")) {
     ServerSend("ChatRoomChat", { Content: "*[To play here you have to give PERMISSION to use the Polished Chastity Belt and the Vibrating Dildo. You will be kicked in 10 seconds. You can change and comeback if you want.]", Type: "Emote", Target: sender.MemberNumber} );

@@ -884,6 +884,21 @@ function adulationCheck(targetMemberNumber) {
 //apparently bot removes love locks for non lovers of bot... hmmmm
 //↩️Gwen: (Well I came in here with a lovers locked training belt and now don't have it
 //it borks only with the training belt... other belts stay locked
+//
+//faltering speech and gagged whispers bcx rules can mess things up
 
+
+
+//Player submitted ideas
+//↩️Davina: (maybe a denial punishment where the sub is put on display and gets edged by the scifi panties for x amount of minutes and has to repeat embarrassing sentences to be released after their time is up?
+
+//↩️Yuria: If there are too many subs allow for one to be "promoted" temporarily to be able to earn points
+//↩️Yuria: and the other, well.. maybe sub lvl2 "downgrade"
+//↩️Yuria: though not sure what thta may be
+//↩️Yuria: and possibly additional vibes on breasts
+//Whisper to Yuria: more restrains and toys maybe ?
+//↩️Yuria: and possibly additional vibes on breasts
+
+//↩️danny: Maybe try making it where you can choose to be sub or dom in here
 
 

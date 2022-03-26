@@ -731,8 +731,9 @@ function enterLeaveEvent(sender,msg) {
 	} else if (InventoryIsPermissionBlocked(sender, "PolishedChastityBelt","ItemPelvis") || InventoryIsPermissionBlocked(sender, "VibratingDildo","ItemVulva")) {
     ServerSend("ChatRoomChat", { Content: "*[To play here you have to give PERMISSION to use the Polished Chastity Belt and the Vibrating Dildo. You will be kicked in 10 seconds. You can change and comeback if you want.]", Type: "Emote", Target: sender.MemberNumber} );
     setTimeout(function(sender) {ChatRoomAdminChatAction("Kick", sender.MemberNumber.toString())}, 10*1000, sender)
-  } else if (sender.ArousalSettings != null && sender.ArousalSettings.Active != "Hybrid" && sender.ArousalSettings.Active != "Automatic") {
-    ServerSend("ChatRoomChat", { Content: "*[To play here you have to set the preference for sexual the activities to hybrid or automatic (locked). You will be kicked in 10 seconds. You can change and comeback if you want.]", Type: "Emote", Target: sender.MemberNumber} );
+  //} else if (sender.ArousalSettings != null && sender.ArousalSettings.Active != "Hybrid" && sender.ArousalSettings.Active != "Automatic") {
+  } else if (sender.ArousalSettings != null && sender.ArousalSettings.Active != "Automatic") {
+    ServerSend("ChatRoomChat", { Content: "*[To play here you have to set the preference for sexual the activities to automatic (locked). You will be kicked in 10 seconds. You can change and comeback if you want.]", Type: "Emote", Target: sender.MemberNumber} );
     setTimeout(function(sender) {ChatRoomAdminChatAction("Kick", sender.MemberNumber.toString())}, 10*1000, sender)
   } else {
 		ServerSend("ChatRoomChat", { Content: "*[ROOM EXPLANATION: orgasms are prohibited. More info in " + Player.Name + " Bio. READ IT]", Type: "Emote", Target: sender.MemberNumber} );
@@ -895,7 +896,6 @@ function adulationCheck(targetMemberNumber) {
 //↩️Yuria: If there are too many subs allow for one to be "promoted" temporarily to be able to earn points
 //↩️Yuria: and the other, well.. maybe sub lvl2 "downgrade"
 //↩️Yuria: though not sure what thta may be
-//↩️Yuria: and possibly additional vibes on breasts
 //Whisper to Yuria: more restrains and toys maybe ?
 //↩️Yuria: and possibly additional vibes on breasts
 

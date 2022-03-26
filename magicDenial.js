@@ -91,7 +91,7 @@ class personMagicData {
 	beingPunished = false
 	strike = 0
 	orgasmResisted = 0
-	vulvaIntensity = 2
+	vulvaIntensity = 3
 	buttIntensity = 1
   lastActivity = Date.now()
   allowedOrgasmNum = 0

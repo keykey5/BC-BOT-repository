@@ -3,7 +3,12 @@
 
 activateStoryRoom()
 
-Player.Description = `Code available here: https://discord.com/channels/554377975714414605/557728347468070912/805068547612737577
+Player.Description = `Code available here: https://github.com/Tarram1010/BC-DenialBar
+----------------------------------------
+
+This little kinky game needs two players. When the game start you will be able to make actions. 
+Use emote <*> to play.
+
 ` // end of description
 ServerSend("AccountUpdate", { Description: Player.Description });
 ChatRoomCharacterUpdate(Player)

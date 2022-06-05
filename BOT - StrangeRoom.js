@@ -3,7 +3,7 @@
 
 activateStoryRoom()
 
-Player.Description = `Code available here: https://github.com/Tarram1010/BC-DenialBar
+Player.Description = `Code available here: https://github.com/keykey5/BC-BOT-repository
 ----------------------------------------
 
 This little kinky game needs two players. When the game start you will be able to make actions. 

@@ -10,7 +10,7 @@ nl = `
 `
 // new line in chat - END
 
-Player.Description = `Code available here: https://github.com/Tarram1010/BC-DenialBar
+Player.Description = `Code available here: https://github.com/keykey5/BC-BOT-repository
 ----------------------------------------
 
 THE PLAYER: a player takes a sub as their stack and play using their clothes and restraints as chips.

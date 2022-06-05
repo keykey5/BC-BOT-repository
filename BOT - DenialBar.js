@@ -30,7 +30,7 @@ ChatRoomMessageAdditionDict["EnterLeave"] = function(SenderCharacter, msg, data)
 ChatRoomMessageAdditionDict["DenialShop"] = function(SenderCharacter, msg, data) {ChatRoomMessageDenialShop(SenderCharacter, msg, data)}
 ChatRoomMessageAdditionDict["DenialRule"] = function(SenderCharacter, msg, data) {ChatRoomMessageDenialRule(SenderCharacter, msg, data)}
 
-Player.Description = `Code available here: https://github.com/Tarram1010/BC-DenialBar
+Player.Description = `Code available here: https://github.com/keykey5/BC-BOT-repository
 
 ------------------------------------------------
 

@@ -30,7 +30,11 @@ ChatRoomMessageAdditionDict["EnterLeave"] = function(SenderCharacter, msg, data)
 ChatRoomMessageAdditionDict["DenialShop"] = function(SenderCharacter, msg, data) {ChatRoomMessageDenialShop(SenderCharacter, msg, data)}
 ChatRoomMessageAdditionDict["DenialRule"] = function(SenderCharacter, msg, data) {ChatRoomMessageDenialRule(SenderCharacter, msg, data)}
 
-Player.Description = `Welcome to ` + Player.Name + ` DENIAL BAR
+Player.Description = `Code available here: https://github.com/Tarram1010/BC-DenialBar
+
+------------------------------------------------
+
+Welcome to ` + Player.Name + ` DENIAL BAR
 
 FOR SUBMISSIVE CUSTOMERS:
 To all our subs customers we provide a free vibrating dildo and chastity belt upon entering.

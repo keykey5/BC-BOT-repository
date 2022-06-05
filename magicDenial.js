@@ -731,9 +731,9 @@ function enterLeaveEvent(sender,msg) {
 	} else if (InventoryIsPermissionBlocked(sender, "PolishedChastityBelt","ItemPelvis") || InventoryIsPermissionBlocked(sender, "VibratingDildo","ItemVulva")) {
     ServerSend("ChatRoomChat", { Content: "*[To play here you have to give PERMISSION to use the Polished Chastity Belt and the Vibrating Dildo. You will be kicked in 10 seconds. You can change and comeback if you want.]", Type: "Emote", Target: sender.MemberNumber} );
     setTimeout(function(sender) {ChatRoomAdminChatAction("Kick", sender.MemberNumber.toString())}, 10*1000, sender)
-  //} else if (sender.ArousalSettings != null && sender.ArousalSettings.Active != "Hybrid" && sender.ArousalSettings.Active != "Automatic") {
-  } else if (sender.ArousalSettings != null && sender.ArousalSettings.Active != "Automatic") {
-    ServerSend("ChatRoomChat", { Content: "*[To play here you have to set the preference for sexual the activities to automatic (locked). You will be kicked in 10 seconds. You can change and comeback if you want.]", Type: "Emote", Target: sender.MemberNumber} );
+  } else if (sender.ArousalSettings != null && sender.ArousalSettings.Active != "Hybrid" && sender.ArousalSettings.Active != "Automatic") {
+  //} else if (sender.ArousalSettings != null && sender.ArousalSettings.Active != "Automatic") {
+    ServerSend("ChatRoomChat", { Content: "*[To play here you have to set the preference for sexual the activities to hybrid or automatic (locked). You will be kicked in 10 seconds. You can change and comeback if you want.]", Type: "Emote", Target: sender.MemberNumber} );
     setTimeout(function(sender) {ChatRoomAdminChatAction("Kick", sender.MemberNumber.toString())}, 10*1000, sender)
   } else {
 		ServerSend("ChatRoomChat", { Content: "*[ROOM EXPLANATION: orgasms are prohibited. More info in " + Player.Name + " Bio. READ IT]", Type: "Emote", Target: sender.MemberNumber} );
@@ -888,7 +888,7 @@ function adulationCheck(targetMemberNumber) {
 //
 //faltering speech and gagged whispers bcx rules can mess things up
 
-
+//if player has diaper, swap diaper item to diaper cloth before adding polished belt
 
 //Player submitted ideas
 //↩️Davina: (maybe a denial punishment where the sub is put on display and gets edged by the scifi panties for x amount of minutes and has to repeat embarrassing sentences to be released after their time is up?
@@ -900,5 +900,14 @@ function adulationCheck(targetMemberNumber) {
 //↩️Yuria: and possibly additional vibes on breasts
 
 //↩️danny: Maybe try making it where you can choose to be sub or dom in here
+
+
+//----------
+//gg: add the denial bar setup here, as a-a w-whipser command for o-olaf
+//gg: Oh... maybe a kitty mode. maybe something like the outfit and vibes that Helpy's in...
+//Gwen: An escape challenge could be fun too nyaa
+//Gwen: Bind a pair of people up in the same restraints and see who escapes all of them first nyaa
+
+
 
 

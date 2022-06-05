@@ -10,7 +10,7 @@ nl = `
 `
 // new line in chat - END
 
-Player.Description = `Code available here: https://discord.com/channels/554377975714414605/557728347468070912/805068547612737577
+Player.Description = `Code available here: https://github.com/Tarram1010/BC-DenialBar
 ----------------------------------------
 
 THE PLAYER: a player takes a sub as their stack and play using their clothes and restraints as chips.
@@ -19,9 +19,9 @@ THE SUB STACK: A sub that represent the amount chips available to the player. Ea
 DOM: can only be a player, not a sub stack. Has no actual penalty.
 SUB: as you can see subs are chained upon entering and the only way to leave is to get 5 wins. You can play either as a stack for someone else or as a player. In case you are a player you lose 2 chips for every win and also winning is harder. You must get a ` + (winTarget+1) + ` instead of a ` + winTarget + `.
 
-HOW TO GET A SUB STACK: To get sub be your stack of chips you must find a willing sub and whisper me the command : /bot stack <name_of_the_sub>. The sub will need to accept.
+HOW TO GET A SUB STACK: To get sub be your stack of chips you must find a willing sub and whisper me the command : !stack <name_of_the_sub>. The sub will need to accept.
 
-GAME EXPLANATION: To start a game round whisper /bot start. When the game starts the dealer will ask who wants to play. If you accept you will bet one chip. Then a card is shown (value from 1 to 10). After that you can decide to bet 1 chip or fold. Then if someone is still playing a second card is draw. If the sum is ` + winTarget + ` or higher the player wins, otherwise they lose.
+GAME EXPLANATION: To start a game round whisper !start. When the game starts the dealer will ask who wants to play. If you accept you will bet one chip. Then a card is shown (value from 1 to 10). After that you can decide to bet 1 chip or fold. Then if someone is still playing a second card is draw. If the sum is ` + winTarget + ` or higher the player wins, otherwise they lose.
 
 THE CHIP: The chip are actually sub clothes and restraints. Each time you lose/spend a chip your sub will lose a piece of clothing or get a restraint. There are 4 clothes and 4 restraints.
 
@@ -30,19 +30,19 @@ AFTER ` + domWinReward + ` WINS (DOM): You get a special reward. You will have t
 
 ------------------------------------------------
 
-COMMANDS: all commands starts with /bot
+COMMANDS: all commands starts with !
 
-/bot leave - You will be restrained with a mistress timer padklock (5 mins) and kicked out of the room.
-/bot point - use this to check how many wins you have, how many chips and who is your domme/sub.
+!leave - You will be restrained with a mistress timer padklock (5 mins) and kicked out of the room.
+!point - use this to check how many wins you have, how many chips and who is your domme/sub.
 
-/bot start - [Dommes ONLY] start a new round
-/bot play - [Dommes ONLY] when a new round starts you can play by using this command. You need to have a stack.
-/bot no - [Dommes ONLY] you can use this command to say that you are not playing a round. This may help speed up the first phase.
-/bot bet - [Dommes ONLY] after the first card is shown you can bet with this command
-/bot fold - [Dommes ONLY] after the first card is shown you can fold with this command
-/bot stack <name_of_the_sub> - [Dommes ONLY] use this to take a sub as your stack (dommes only)
-/bot accept - [Subs ONLY] to accept a domme
-/bot refuse - [Subs ONLY] to refuse a domme
+!start - [Dommes ONLY] start a new round
+!play - [Dommes ONLY] when a new round starts you can play by using this command. You need to have a stack.
+!no - [Dommes ONLY] you can use this command to say that you are not playing a round. This may help speed up the first phase.
+!bet - [Dommes ONLY] after the first card is shown you can bet with this command
+!fold - [Dommes ONLY] after the first card is shown you can fold with this command
+!stack <name_of_the_sub> - [Dommes ONLY] use this to take a sub as your stack (dommes only)
+!accept - [Subs ONLY] to accept a domme
+!refuse - [Subs ONLY] to refuse a domme
 ` // end of description
 ServerSend("AccountUpdate", { Description: Player.Description });
 ChatRoomCharacterUpdate(Player)
@@ -106,7 +106,7 @@ function firstCard() {
     }
     mess = mess + nl + `--------------------`
     ServerSend("ChatRoomChat", { Content: mess, Type: "Emote"} );
-    ServerSend("ChatRoomChat", { Content: "What are you going to do? [/bot bet or /bot fold]", Type: "Chat"} );
+    ServerSend("ChatRoomChat", { Content: "What are you going to do? [!bet or !fold]", Type: "Chat"} );
     timeoutHandle = setTimeout(secondCard, 30*1000)
   }
 }
@@ -191,7 +191,7 @@ function checkWinners() {
       }
     } else {
       if (customerList[ChatRoomCharacter[D].MemberNumber].winNum == domWinReward) {
-        ServerSend("ChatRoomChat", { Content: "Congratulations " + ChatRoomCharacter[D].Name + "! You got " + domWinReward + " wins. You have earned the rights to a special reward! When you want to get your reward just use the command '/bot reward'.", Type: "Chat"} );
+        ServerSend("ChatRoomChat", { Content: "Congratulations " + ChatRoomCharacter[D].Name + "! You got " + domWinReward + " wins. You have earned the rights to a special reward! When you want to get your reward just use the command '!reward'.", Type: "Chat"} );
       }
     }
 
@@ -205,7 +205,7 @@ function checkWinners() {
 function ChatRoomMessageCasino(SenderCharacter, msg, data) {
   if (data.Type != null && SenderCharacter.MemberNumber != Player.MemberNumber) {
 
-    if ((data.Type == "Hidden") && (msg.startsWith("ChatRoomBot"))) {
+    if (msg.startsWith("!") || ((data.Type == "Hidden") && (msg.startsWith("ChatRoomBot")))) {
       if (msg.includes("point")) {
 
         mess = `*--------------------` +
@@ -245,14 +245,14 @@ function ChatRoomMessageCasino(SenderCharacter, msg, data) {
               nameFound = true
               requestDict[ChatRoomCharacter[D].MemberNumber] = SenderCharacter.MemberNumber
               ServerSend("ChatRoomChat", { Content: "*Request sent, waiting for answer.", Type: "Emote", Target: SenderCharacter.MemberNumber});
-              ServerSend("ChatRoomChat", { Content: "*" + SenderCharacter.Name + " wants to use you as her submissive stack. Do you accept? [whisper to " + Player.Name + " '/bot accept' or '/bot refuse'. After 30s it will be considered a refuse.]", Type: "Emote", Target: ChatRoomCharacter[D].MemberNumber});
+              ServerSend("ChatRoomChat", { Content: "*" + SenderCharacter.Name + " wants to use you as her submissive stack. Do you accept? [whisper to " + Player.Name + " '!accept' or '!refuse'. After 30s it will be considered a refuse.]", Type: "Emote", Target: ChatRoomCharacter[D].MemberNumber});
               setTimeout(function(stackMemberNumber) {if (ChatRoomCharacter[D].MemberNumber in requestDict) {ServerSend("ChatRoomChat", { Content: "*" + ChatRoomCharacter[D].Name + " did not answer.", Type: "Emote", Target: SenderCharacter.MemberNumber}), delete requestDict[ChatRoomCharacter[D].MemberNumber]}} , 30*1000, ChatRoomCharacter[D].MemberNumber)
               break
             }
           }
-          if (!nameFound) ServerSend("ChatRoomChat", { Content: "*You have to choose someone. '/bot stack <name>'.", Type: "Emote", Target: SenderCharacter.MemberNumber} );
+          if (!nameFound) ServerSend("ChatRoomChat", { Content: "*You have to choose someone. '!stack <name>'.", Type: "Emote", Target: SenderCharacter.MemberNumber} );
         } else {
-          ServerSend("ChatRoomChat", { Content: "*You are already coupled with someone. Use the command '/bot point' for more info.", Type: "Emote", Target: SenderCharacter.MemberNumber} );
+          ServerSend("ChatRoomChat", { Content: "*You are already coupled with someone. Use the command '!point' for more info.", Type: "Emote", Target: SenderCharacter.MemberNumber} );
         }
       } else if (msg.toLowerCase().includes("accept")) {
         if (SenderCharacter.MemberNumber in requestDict) {
@@ -272,7 +272,7 @@ function ChatRoomMessageCasino(SenderCharacter, msg, data) {
           CharacterSetActivePose(Player, null, true);
           ServerSend("ChatRoomCharacterPoseUpdate", { Pose: Player.ActivePose });
           game.status = "playerSelection"
-          ServerSend("ChatRoomChat", { Content: "A new round is starting. Who is gonna play? [to play this round whisper: /bot play] ", Type: "Chat"});
+          ServerSend("ChatRoomChat", { Content: "A new round is starting. Who is gonna play? [to play this round whisper: !play] ", Type: "Chat"});
           timeoutHandle = setTimeout(firstCard, 30*1000)
         } else if (game.status == "end") {
           ServerSend("ChatRoomChat", { Content: "A game recently ended. Let's wait a moment before starting another one. In the mean time have fun with your slav- ehm... stack. (I will kneel when a new game can start)", Type: "Chat", Target: SenderCharacter.MemberNumber});
@@ -284,7 +284,7 @@ function ChatRoomMessageCasino(SenderCharacter, msg, data) {
           game.playerDict[SenderCharacter.MemberNumber] = 0
           ServerSend("ChatRoomChat", { Content: SenderCharacter.Name + " is going to play.", Type: "Chat"});
         } else {
-          ServerSend("ChatRoomChat", { Content: "*To start a new round use the command /bot start.", Type: "Emote", Target: SenderCharacter.MemberNumber});
+          ServerSend("ChatRoomChat", { Content: "*To start a new round use the command !start.", Type: "Emote", Target: SenderCharacter.MemberNumber});
         }
       } else if (msg.toLowerCase().includes("bet") && SenderCharacter.MemberNumber in game.playerDict && game.playerDict[SenderCharacter.MemberNumber] == 0 ) {
         game.playerDict[SenderCharacter.MemberNumber] = 1
@@ -373,7 +373,7 @@ function enterLeaveEvent(sender,msg) {
   } else {
     newCustomer(sender)
     ServerSend("ChatRoomChat", { Content: "*[RULES: Check " + Player.Name + " BIO to see all the rules and commands. Have fun.]", Type: "Emote", Target: sender.MemberNumber} );
-    ServerSend("ChatRoomChat", { Content: "*[You can leave with the command /bot leave. But you will receive a small punishment for doing so (mistress lock timer = 5 min)]", Type: "Emote", Target: sender.MemberNumber} );
+    ServerSend("ChatRoomChat", { Content: "*[You can leave with the command !leave. But you will receive a small punishment for doing so (mistress lock timer = 5 min)]", Type: "Emote", Target: sender.MemberNumber} );
     customerList[sender.MemberNumber].linkedTo = 0
     customerList[sender.MemberNumber].isPlayer = false
     if (customerList[sender.MemberNumber].role == "sub") {

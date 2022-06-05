@@ -1,4 +1,4 @@
-# BC-BOTs repository
+# BC-BOT-repository
 
 Currently available BOTs:
 * Denial Bar

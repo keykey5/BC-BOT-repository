@@ -1,4 +1,4 @@
-// SCRIPTED - Work together to reach the end - TIP: talk to each other!
+// SCRIPTED - Work together to reach the end - TIP: talk to each other! - CODE in BIO.
 // -----------------------------------------------------------------------------
 
 activateStoryRoom()

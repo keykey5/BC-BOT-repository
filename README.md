@@ -3,7 +3,7 @@
 Currently available BOTs:
 * Denial Bar
 * Casino
-* Strange Room (not working anymore, needs to be updated)
+* Strange Room
 
 
 ## Quick Instructions

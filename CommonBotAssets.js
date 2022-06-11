@@ -396,9 +396,10 @@ function dollifyAll(excludeMemberNumber = -1) {
 	}
 }
 
+
 function isExposed(C, ignoreItemArray = []) {
   // in this case C is ChatRoomCharacter
-  if (InventoryAllow(C, ["AccessBreast", "AccessVulva"]) && !customInventoryGroupIsBlocked(C, "ItemBreast") && !customInventoryGroupIsBlocked(C, "ItemNipples") && !customInventoryGroupIsBlocked(C, "ItemVulva", ignoreItemArray)) {
+  if (InventoryPrerequisiteMessage(C, "AccessBreast")==="" && InventoryPrerequisiteMessage(C, "AccessVulva")==="" && !customInventoryGroupIsBlocked(C, "ItemBreast") && !customInventoryGroupIsBlocked(C, "ItemNipples") && !customInventoryGroupIsBlocked(C, "ItemVulva", ignoreItemArray)) {
     return true
   }
   return false

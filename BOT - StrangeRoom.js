@@ -958,15 +958,6 @@ function openRoomStory() {
 
 
 
-function isExposed(C, ignoreItemArray = []) {
-  if (InventoryPrerequisiteMessage(C, "AccessBreast")==="" && InventoryPrerequisiteMessage(C, "AccessVulva")==="" && !customInventoryGroupIsBlocked(C, "ItemBreast") && !customInventoryGroupIsBlocked(C, "ItemNipples") && !customInventoryGroupIsBlocked(C, "ItemVulva", ignoreItemArray)) {
-    return true
-  }
-  return false
-}
-
-
-
 
 function customInventoryGroupIsBlocked(C, GroupName, ignoreItemArray = []) {
 

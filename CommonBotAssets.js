@@ -1,3 +1,23 @@
+// AUTORELOG -------------------------------------------------------------------------------------
+// This code allows you to autorelog after a disconnection. 
+BOTAccountDict = {}
+
+// You need to uncomment the following lines and write the required information.
+// BOTAccountDict[<MemeberNumber>].AccountName = "<accountname>"
+// BOTAccountDict[<MemeberNumber>].Password = "<password>"
+
+
+ServerSocket.on("connect", ServerConnect); //ServerConnect modified below for auto-relog
+
+function ServerConnect() {
+	ServerSetConnected(true);
+	ServerSend("AccountLogin", { AccountName: BOTAccountDict[Player.MemberNumber].AccountName, Password: BOTAccountDict[Player.MemberNumber].Password });
+}
+
+
+// -----------------------------------------------------------------------------------------------
+
+
 ServerSocket.on("ChatRoomMessage", function (data) { ChatRoomMessageAdd(data); });
 
 if (typeof ChatRoomMessageAdditionDict === 'undefined') {
@@ -82,19 +102,19 @@ function ChatRoomMessageUngarble(SenderCharacter, msg, data) {
 // -----------------------------------------------------------------------------------------------
 
 class personMagicData {
-  name = ''
-  role = ''
+	name = ''
+	role = ''
 	//rules = [] only present in prototypes
 	points = 0
-  totalPointsGained = 0
+	totalPointsGained = 0
 	lockCode = Math.floor(Math.random() * 9000+1000).toString()
 	beingPunished = false
 	strike = 0
 	orgasmResisted = 0
 	vulvaIntensity = 3
 	buttIntensity = 1
-  lastActivity = Date.now()
-  allowedOrgasmNum = 0
+	lastActivity = Date.now()
+	allowedOrgasmNum = 0
 }
 if (personMagicData.prototype.rules == null) {
   personMagicData.prototype.rules = []
@@ -119,10 +139,10 @@ restrainsLocationList = ["ItemVulva","ItemVulvaPiercings","ItemButt","ItemArms",
 clothesLocationList = ["Cloth","ClothLower","ClothAccessory","Suit","SuitLower","Corset","Gloves","Shoes","Hat","Socks","Bra","Panties","Necklace","RightAnklet","LeftAnklet","Mask","HairAccessory1",
   "HairAccessory2","HairAccessory3"]
 
-function freeAll() {
+function freeAll(reapplyCloth = false) {
 	for (var R = 0; R < ChatRoomCharacter.length; R++) {
 		removeRestrains(R)
-		reapplyClothing(ChatRoomCharacter[R])
+		if (reapplyCloth) {reapplyClothing(ChatRoomCharacter[R])}
 		ChatRoomCharacterUpdate(ChatRoomCharacter[R])
 	}
 	ServerSend("ChatRoomChat", { Content: "*Everyone has been freed.", Type: "Emote"} );
@@ -132,7 +152,7 @@ function removeRestrains(char){
   target = getCharacterObject(char)
 
 	InventoryRemove(target,"ItemVulva")
-  InventoryRemove(target,"ItemVulvaPiercings")
+ 	InventoryRemove(target,"ItemVulvaPiercings")
 	InventoryRemove(target,"ItemButt")
 	InventoryRemove(target,"ItemArms")
 	InventoryRemove(target,"ItemHands")
@@ -296,7 +316,7 @@ function dressLike(char, dress = "doll", dressColor = "default", removeUnderwear
 		InventoryWear(target, "PonyBoots","Shoes",dressColor)
 		InventoryWear(target, "LeatherHarness","ItemTorso",dressColor)
 
-  } else if (dress == "pony elegant") {
+  	} else if (dress == "pony elegant") {
 		InventoryWear(target, "HorsetailPlug","ItemButt",dressColor) //HorsetailPlug1
 		InventoryWear(target, "LeatherArmbinder","ItemArms",dressColor,50)
 		InventoryWear(target, "HarnessPonyBits","ItemMouth",dressColor)
@@ -305,7 +325,7 @@ function dressLike(char, dress = "doll", dressColor = "default", removeUnderwear
 		InventoryWear(target, "PonyEars1","HairAccessory2",dressColor)
 		InventoryWear(target, "LatexSocks1","Socks",dressColor)
 
-  } else if (dress == "pony race") {
+ 	} else if (dress == "pony race") {
 		InventoryWear(target, "HorsetailPlug","ItemButt",dressColor) //HorsetailPlug1
 		InventoryWear(target, "LeatherArmbinder","ItemArms",dressColor,50)
 		InventoryWear(target, "HarnessPonyBits","ItemMouth",dressColor)
@@ -336,38 +356,69 @@ function dressLike(char, dress = "doll", dressColor = "default", removeUnderwear
 		//InventoryWear(target, "HarnessBallGag","ItemMouth",dressColor)
 		InventoryWear(target, "PuppyEars1","HairAccessory1",dressColor)
 
-	} else if (dress == "trainer") {
-    InventoryWear(target, "Jeans1", "ClothLower", "#bbbbbb");
-    InventoryWear(target, "Boots1", "Shoes", "#3d0200");
-    InventoryWear(target, "TShirt1", "Cloth", "#aa8080");
-    InventoryWear(target, "Beret1", "Hat", "#202020");
-    InventoryWear(target, "Bandana", "Necklace");
+	} else if (dress == "office") {
 
-  } else if (dress == "trainer sub") {
-    InventoryWear(target, "JeansShorts", "ClothLower", "#838383");
-    InventoryWear(target, "Boots1", "Shoes", "#3d0200");
-    InventoryWear(target, "Beret1", "Hat", "#202020");
-    InventoryWear(target, "SexyBeachPanties1", "Panties");
-    InventoryWear(target, "SexyBeachBra1", "Bra");
-    InventoryWear(target, "Bandana", "Necklace");
+		if (ReputationCharacterGet(target,"Dominant")>=50) {
+			InventoryWear(target, "PencilSkirt","ClothLower","#202020")
+		} else {
+			InventoryWear(target, "ShortPencilSkirt","ClothLower","#202020")
+		}
+
+		if (ReputationCharacterGet(target,"Dominant")>=90) {
+			InventoryWear(target, "AdmiralTop","Cloth",["#202020","#808080","Default"])
+		} else {
+			rnd = Math.floor(Math.random() * 3 + 1)
+			if (rnd == 1) {
+				InventoryWear(target, "LeatherCropTop","Cloth")
+			} else if (rnd == 2) {
+				InventoryWear(target, "ShoulderlessTop","Cloth")
+			} else if (rnd == 3) {
+				InventoryWear(target, "ComfyTop","Cloth")
+			}
+		}
+
+		rnd = Math.floor(Math.random() * 3 + 1)
+		if (rnd == 1) {
+			InventoryWear(target, "AnkleStrapShoes","Shoes","#090000")
+		} else if (rnd == 2) {
+			InventoryWear(target, "Heels2","Shoes","#090000")
+		} else if (rnd == 3) {
+			InventoryWear(target, "Shoes5","Shoes","#0A0A0A")
+		}
+
+
+	} else if (dress == "trainer") {
+		InventoryWear(target, "Jeans1", "ClothLower", "#bbbbbb");
+		InventoryWear(target, "Boots1", "Shoes", "#3d0200");
+		InventoryWear(target, "TShirt1", "Cloth", "#aa8080");
+		InventoryWear(target, "Beret1", "Hat", "#202020");
+		InventoryWear(target, "Bandana", "Necklace");
+
+	} else if (dress == "trainer sub") {
+		InventoryWear(target, "JeansShorts", "ClothLower", "#838383");
+		InventoryWear(target, "Boots1", "Shoes", "#3d0200");
+		InventoryWear(target, "Beret1", "Hat", "#202020");
+		InventoryWear(target, "SexyBeachPanties1", "Panties");
+		InventoryWear(target, "SexyBeachBra1", "Bra");
+		InventoryWear(target, "Bandana", "Necklace");
 
 	} else if (dress == "mistress") {
-    InventoryWear(target, "MistressBoots", "Shoes", dressColor);
-    InventoryWear(target, "MistressGloves", "Gloves", dressColor);
-    InventoryWear(target, "MistressTop", "Cloth", dressColor);
-    InventoryWear(target, "MistressBottom", "ClothLower", dressColor);
+		InventoryWear(target, "MistressBoots", "Shoes", dressColor);
+		InventoryWear(target, "MistressGloves", "Gloves", dressColor);
+		InventoryWear(target, "MistressTop", "Cloth", dressColor);
+		InventoryWear(target, "MistressBottom", "ClothLower", dressColor);
 
 	} else if (dress == "concubine" || dress == "temple offering" || dress == "temple") {
-    InventoryWear(target, "HaremBra", "Bra", dressColor);
-    InventoryWear(target, "HaremPants", "ClothLower", dressColor);
+		InventoryWear(target, "HaremBra", "Bra", dressColor);
+		InventoryWear(target, "HaremPants", "ClothLower", dressColor);
 
-    if (dress == "concubine" || dress == "temple offering") {
-      InventoryWear(target, "FaceVeil", "Mask", dressColor);
-      InventoryWear(target, "BarefootSandals1", "Shoes", dressColor);
-    } else {
-      InventoryWear(target, "Dress2", "Cloth", dressColor);
-      InventoryWear(target, "Sandals", "Shoes", dressColor);
-    }
+		if (dress == "concubine" || dress == "temple offering") {
+			InventoryWear(target, "FaceVeil", "Mask", dressColor);
+			InventoryWear(target, "BarefootSandals1", "Shoes", dressColor);
+		} else {
+			InventoryWear(target, "Dress2", "Cloth", dressColor);
+			InventoryWear(target, "Sandals", "Shoes", dressColor);
+		}
 	}
 
 	// Update Restrain to server

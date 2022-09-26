@@ -3,6 +3,7 @@
 Currently available BOTs:
 * Denial Bar
 * Casino
+* Office
 * Strange Room
 
 
@@ -23,6 +24,7 @@ To use the BOT in this repository:
 
 This file contains some assets useful to create the BOTs.
 
+* Code to autorelog after a disconnetion (thanks to Jessica Lane)
 * Code needed to intercept the message in the chat
 * Code to understand garbled messages (not actually needed for the bot to understand messages)
 * Code to recover the character object (getCharacterObject()) starting from anything: player position in the room (0-9), the player MemberNumber or the character Object

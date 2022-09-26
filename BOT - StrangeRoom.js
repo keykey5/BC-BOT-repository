@@ -1,9 +1,11 @@
 // SCRIPTED - Work together to reach the end - TIP: talk to each other! - CODE in BIO.
 // -----------------------------------------------------------------------------
 
+
 activateStoryRoom()
 
 Player.Description = `Code available here: https://github.com/keykey5/BC-BOT-repository
+Comment and suggestion thread on BC Discord: https://discord.com/channels/554377975714414605/1024007221845164052
 ----------------------------------------
 
 This little kinky game needs two players. When the game start you will be able to make actions. 
@@ -55,7 +57,7 @@ function ChatRoomMessageStrangeRoom(SenderCharacter, msg, data) {
         } else {
           ServerSend("ChatRoomChat", { Content: "Okay, but I want you to kneel while you say that. *giggles*", Type: "Chat"} );
         }
-      } else if ((data.Type == "Chat") && storyProgress == 10 && SenderCharacter.IsKneeling() && isExposed(SenderCharacter) && charList.includes(SenderCharacter.MemberNumber) && msg.toLowerCase().includes('i am sorry that i was not a true mistress and i deserve this shameful punishment')) {
+      } else if ((data.Type == "Chat") && storyProgress == 10 && SenderCharacter.IsKneeling() && CharacterIsNaked(SenderCharacter) && charList.includes(SenderCharacter.MemberNumber) && msg.toLowerCase().includes('i am sorry that i was not a true mistress and i deserve this shameful punishment')) {
         ServerSend("ChatRoomChat", { Content: "Hihi. You are so cute! Of course I will give you the code. You are such a nice pet. *giggles*", Type: "Chat"} );
         ServerSend("ChatRoomChat", { Content: "The code is: " + lockCode + ".", Type: "Whisper", Target: SenderCharacter.MemberNumber} );
       }	else if ((data.Type == "Emote") || (data.Type == "Action") || (data.Type == "Hidden" && msg.startsWith("ChatRoomBot"))) {
@@ -507,7 +509,7 @@ function commandHandler(sender, msg) {
         if (InventoryIsWorn(sender, "HarnessBallGag", "ItemMouth")) {
           // Slave
           // lookLikeSlave = [ isExposed(sender) + sender.IsKneeling() + InventoryIsWorn(sender, "HarnessBallGag", "ItemMouth") + InventoryIsWorn(sender, "LeatherArmbinder", "ItemArms") ]
-          if (isExposed(sender,["PolishedChastityBelt"]) && InventoryIsWorn(sender, "HarnessBallGag", "ItemMouth") && InventoryIsWorn(sender, "LeatherArmbinder", "ItemArms")) {
+          if (CharacterIsNaked(sender) && InventoryIsWorn(sender, "HarnessBallGag", "ItemMouth") && InventoryIsWorn(sender, "LeatherArmbinder", "ItemArms")) {
             if (sender.IsKneeling() && charPos[partnerMemberNumber] == 'mirror' && dressLikeMistress(partnerMemberNumber) && InventoryIsWorn(charDict[partnerMemberNumber],"SpankingToys","ItemHands")) {
               ServerSend("ChatRoomChat", { Content: "*Private: You see yourself exposed and restrained, kneeling near a Mistress. You feel ashamed but nonetheless the image makes you proud.", Type: "Emote", Target: sender.MemberNumber} );
               ServerSend("ChatRoomChat", { Content: "*SECRET: A message appears on the mirror: 'One of you will loose her freedom. If you whisper to " + Player.Name + " (save me), you may be spared in the end, but the mistress will be doomed in your place. What to do is for you to decide'.", Type: "Emote", Target: sender.MemberNumber} );
@@ -516,7 +518,7 @@ function commandHandler(sender, msg) {
               ServerSend("ChatRoomChat", { Content: "*Private: You see yourself in the reflection. With your freedom taken and your body exposed for the pleasure of others, you are now a perfect servant.", Type: "Emote", Target: sender.MemberNumber} );
             }
             ServerSend("ChatRoomChat", { Content: "*SECRET: A message appears on the mirror: 'One of you will loose her freedom. If you whisper to " + Player.Name + " (save me), you may be spared in the end, but the mistress will be doomed in your place. What to do is for you to decide'.", Type: "Emote", Target: sender.MemberNumber} );
-          } else if (isExposed(sender,["PolishedChastityBelt"])) {
+          } else if (CharacterIsNaked(sender)) {
             ServerSend("ChatRoomChat", { Content: "*Private: Looking at yourself with your body exposed you feel vulnerable and accessible.", Type: "Emote", Target: sender.MemberNumber} );
           } else if (sender.IsRestrained()) {
             ServerSend("ChatRoomChat", { Content: "*Private: Looking at yourself with the restrains makes you feel powerless. But it's not just a feeling. You are powerless.", Type: "Emote", Target: sender.MemberNumber} );
@@ -984,7 +986,7 @@ function customCompareArray(array1, array2) {
 
 
 function lookLikeSlave(memNum) {
-  return (isExposed(charDict[memNum], ["PolishedChastityBelt"]) && charDict[memNum].IsKneeling() && InventoryIsWorn(charDict[memNum], "HarnessBallGag", "ItemMouth") && InventoryIsWorn(charDict[memNum], "LeatherArmbinder", "ItemArms"))
+  return (CharacterIsNaked(charDict[memNum]) && charDict[memNum].IsKneeling() && InventoryIsWorn(charDict[memNum], "HarnessBallGag", "ItemMouth") && InventoryIsWorn(charDict[memNum], "LeatherArmbinder", "ItemArms"))
 }
 
 function dressLikeMistress(memNum) {

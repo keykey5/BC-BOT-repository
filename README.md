@@ -4,6 +4,7 @@ Currently available BOTs:
 * Denial Bar
 * Casino
 * Office
+* Pony Contest
 * Strange Room
 
 

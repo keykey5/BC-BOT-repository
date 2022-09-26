@@ -1,11 +1,11 @@
 // AUTORELOG -------------------------------------------------------------------------------------
 // This code allows you to autorelog after a disconnection. 
-BOTAccountDict = {}
 
 // You need to uncomment the following lines and write the required information.
+// BOTAccountDict = {}
+// BOTAccountDict[<MemeberNumber>] = {}
 // BOTAccountDict[<MemeberNumber>].AccountName = "<accountname>"
 // BOTAccountDict[<MemeberNumber>].Password = "<password>"
-
 
 ServerSocket.on("connect", ServerConnect); //ServerConnect modified below for auto-relog
 

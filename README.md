@@ -41,3 +41,7 @@ This file contains some assets useful to create the BOTs.
 
 
 
+## LICENSE
+
+BSD Zero Clause License
+(You can do whatever you want with this code)

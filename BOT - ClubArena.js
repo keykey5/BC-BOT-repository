@@ -1,5 +1,5 @@
 RoomName = "Bondage Club Arena"
-RoomDescription = "BOT - participate or be the jury in this kinky competition"
+RoomDescription = "BOT - participate or be the judge in this kinky competition"
 
 // BOT - Kinky challenges between club members: who will be on top? 
 // -----------------------------------------------------------------------------
@@ -9,6 +9,7 @@ nl = `
 `
 // new line in chat - END
 
+timeoutHandler = [] // preallocate timeoutHandler
 
 // Update Room Data
 ChatRoomData.Background = "LeatherChamber"
@@ -41,7 +42,7 @@ To end this phase one of the participants has to use the command !end. After the
 If the second participant uses the command !end too then the phase will end immediately.
 
 4 - VOTE
-At this point the jury will have the possibility to vote the best contestant. The command is !vote <name>. 
+At this point the judges will have the possibility to vote the best contestant. The command is !vote <name>. 
 This phase will last 5 minutes or until everyone has voted.
 
 ------------------------------------------------
@@ -49,19 +50,19 @@ This phase will last 5 minutes or until everyone has voted.
 THE CONTESTANTS:
 Two club members will be selected to participate in the competition, either voluntarily or forced by the Arena Manager.
 After the participants are selected the Arena Manager will present a theme and the participants will have to do their best to represent the selected theme.
-At the end the jury (all the other members in the room) will be able to vote their preferred challenger.
+At the end the judges (all the other members in the room) will be able to vote their preferred challenger.
 
 THE THEME:
 It can be as simple as "cat girl" or more complex like "demonstrate how a club slave should be punished when being rude to a club mistress".
 Once the theme has been announced the participants will have to work as they prefer to show their best interpretation of it. 
 They can change their clothes and restrain themselves if they'd like to do so (nasty submissive^^) or they can draft someone from the jury and use them if they prefer (mistress may enjoy this approach more).
 The participants should not only select the appropriate attire but also perform and act in the most appropriate way.
-Since the winner will be determined by a vote from the jury the objective is to gain the jury's favor by any means. 
+Since the winner will be determined by a vote from the judges the objective is to gain the judges' favor by any means. 
 
-THE JURY:
+THE JUDGES:
 Any club member who is not participating in the contest is considered part of the jury. 
 The jury's role is not only to vote but also to keep the contest fair, if they think that one of the contestant is playing dirty or doing something wrong they can admonish the her: in the end is the jury that decides the winner so it's better to follow their guidelines!
-The jury can enjoy the show, chat and do whatever they please although it is preferable if they don't interfere with the contestants too much, unless requested.
+The judges can enjoy the show, chat and do whatever they please although it is preferable if they don't interfere with the contestants too much, unless requested.
 Even if coerced to play a part in the show a member of the jury isn't considered a contestant: they will be able to vote at the end and will not gain/lose any point.
 
 ------------------------------------------------
@@ -81,7 +82,7 @@ Commands
 !end - use this command to end the contest phase when you think you ave done everything you could to please the jury
 !vote <number> - vote the best contestant (only jurors)
 !info - gives information on the current competition
-
+!reset - reset the room (use this ONLY if the script brakes)
 
 ` // end of description
 ServerSend("AccountUpdate", { Description: Player.Description });
@@ -126,6 +127,10 @@ function ChatRoomMessageVoteRoom(sender, msg, data) {
     if (participantList.includes(sender.MemberNumber)) {
       ServerSend("ChatRoomChat", { Content: `*A participant left the room. The room has been resetted.`, Type: "Emote"} );
       resetRoom()
+    } else if (juryList.includes(sender.MemberNumber) && !votedList.includes(sender.MemberNumber)) {
+      ServerSend("ChatRoomChat", { Content: `*A judge left the room. They won't be able to vote anymore .`, Type: "Emote"} );
+      juryList.splice(juryList.indexOf(sender.MemberNumber),1)
+      checkTotalVotes()
     }
   }
 
@@ -156,29 +161,30 @@ function ChatRoomMessageVoteRoom(sender, msg, data) {
 function commandHandler(sender, msg) {
 
   if (msg.toLowerCase().includes("reset")) {
-    // TODO...
+    ServerSend("ChatRoomChat", { Content: "*" + charname(sender) + " used the command to RESET the room.", Type: "Emote"} );
+    resetRoom()
 
   } else if (msg.toLowerCase().includes("info")) {
     infoMessage(sender)
     
-  } else if (msg.toLowerCase().includes("start") && phase == 0) {
+  // } else if (msg.toLowerCase().includes("start") && phase == 0) {
 
-    if (ChatRoomCharacter.length < 4) {
-      ServerSend("ChatRoomChat", { Content: "*This command can only be used if there are at least 4 people in the room (Bot included).", Type: "Emote", Target: sender.MemberNumber} );
-      return
-    }
+  //   if (ChatRoomCharacter.length < 4) {
+  //     ServerSend("ChatRoomChat", { Content: "*This command can only be used if there are at least 4 people in the room (Bot included).", Type: "Emote", Target: sender.MemberNumber} );
+  //     return
+  //   }
 
-    if (startCommandList.includes(sender.MemberNumber)) {
-      ServerSend("ChatRoomChat", { Content: "*You already requested to start a new competition.", Type: "Emote", Target: sender.MemberNumber} );
-    } else {
-      startCommandList.push(sender.MemberNumber)
-      ServerSend("ChatRoomChat", { Content: "*Start request sent. Three requests are needed. [" + startCommandList.length + "/3]", Type: "Emote", Target: sender.MemberNumber} );
-      InventoryGet(Player, "ItemNeckRestraints").Property.Text3 = startCommandList.length + "/3"
-      ChatRoomCharacterUpdate(Player)
-      if (startCommandList.length>=3) {
-        selectParticipantAnnouncement()
-      }
-    }
+  //   if (startCommandList.includes(sender.MemberNumber)) {
+  //     ServerSend("ChatRoomChat", { Content: "*You already requested to start a new competition.", Type: "Emote", Target: sender.MemberNumber} );
+  //   } else {
+  //     startCommandList.push(sender.MemberNumber)
+  //     ServerSend("ChatRoomChat", { Content: "*Start request sent. Three requests are needed. [" + startCommandList.length + "/3]", Type: "Emote", Target: sender.MemberNumber} );
+  //     InventoryGet(Player, "ItemNeckRestraints").Property.Text3 = startCommandList.length + "/3"
+  //     ChatRoomCharacterUpdate(Player)
+  //     if (startCommandList.length>=3) {
+  //       selectParticipantAnnouncement()
+  //     }
+  //   }
 
   } else if (msg.toLowerCase().includes("participate") && phase == 1) {
     if (participantList.includes(sender.MemberNumber)) {
@@ -193,7 +199,7 @@ function commandHandler(sender, msg) {
       }
       ChatRoomCharacterUpdate(Player)
 
-      ServerSend("ChatRoomChat", { Content: "* " + sender.Name + " will be one of the contestant!", Type: "Emote"} );
+      ServerSend("ChatRoomChat", { Content: "* " + charname(sender) + " will be one of the contestant!", Type: "Emote"} );
       if (participantList.length == 2) {
         sendContestAnnouncement()
       }
@@ -206,12 +212,12 @@ function commandHandler(sender, msg) {
         if (ReputationCharacterGet(sender,"Dominant")>ReputationCharacterGet(ChatRoomCharacter[D],"Dominant")+50) {
           participantList.push(ChatRoomCharacter[D].MemberNumber)
           if (participantList.length == 1) {
-            InventoryGet(Player, "ItemNeckRestraints").Property.Text2 = customerList[ChatRoomCharacter[D].MemberNumber].name
+            InventoryGet(Player, "ItemNeckRestraints").Property.Text2 = charname(ChatRoomCharacter[D])
           } else {
-            InventoryGet(Player, "ItemNeckRestraints").Property.Text3 = customerList[ChatRoomCharacter[D].MemberNumber].name
+            InventoryGet(Player, "ItemNeckRestraints").Property.Text3 = charname(ChatRoomCharacter[D])
           }
           ChatRoomCharacterUpdate(Player)
-          ServerSend("ChatRoomChat", { Content: "* " + sender.Name + " used her authority to force " + ChatRoomCharacter[D].Name + " to be one of the contestant!", Type: "Emote"} );
+          ServerSend("ChatRoomChat", { Content: "* " + charname(sender) + " used her authority to force " + charname(ChatRoomCharacter[D]) + " to be one of the contestant!", Type: "Emote"} );
         } else {
           ServerSend("ChatRoomChat", { Content: "*You are not dominant enough to force her to participate.", Type: "Emote", Target: sender.MemberNumber} );
         }
@@ -246,8 +252,8 @@ function commandHandler(sender, msg) {
 
   } else if (msg.toLowerCase().includes("vote") && phase == 4) {
 
-    if (participantList.includes(sender.MemberNumber)) {
-      ServerSend("ChatRoomChat", { Content: "*You cannot vote.", Type: "Emote", Target: sender.MemberNumber} );
+    if (!juryList.includes(sender.MemberNumber)) {
+      ServerSend("ChatRoomChat", { Content: "*You are not a judge of the current competition.", Type: "Emote", Target: sender.MemberNumber} );
       return
     }
 
@@ -263,22 +269,26 @@ function commandHandler(sender, msg) {
     }
 
     votedList.push(sender.MemberNumber)
+    ServerSend("ChatRoomChat", { Content: "* - " + charname(sender) + " voted - ", Type: "Emote"} );
 
 
     // if everyone in the room voted the vote phase will be ended earlier
-    everyoneVoted = true
-    for (var D = 0; D < ChatRoomCharacter.length; D++) {
-      if (!(ChatRoomCharacter[D].MemberNumber in votedList) && !(ChatRoomCharacter[D].MemberNumber in participantList)) {
-        everyoneVoted = false
-        break
-      }
-    }
-
-    if (everyoneVoted) {
-      endVotePhase() 
-    }
+    checkTotalVotes()
     
   }
+
+}
+
+
+function checkTotalVotes(){
+
+  for (var D = 0; D < juryList.length; D++) {
+    if (!votedList.includes(juryList[D])) {
+      return
+    } 
+  }
+
+  endVotePhase() 
 
 }
 
@@ -295,11 +305,19 @@ function infoMessage(sender){
     announcementMsg = announcementMsg + nl + `Participant 1: ` + customerList[participantList[0]].name
     announcementMsg = announcementMsg + nl + `Participant 2: ` + customerList[participantList[1]].name
     announcementMsg = announcementMsg + nl + `THEME: ` + theme
+    announcementMsg = announcementMsg + nl 
     announcementMsg = announcementMsg + nl + `Use the command !end when you feel ready and want to move to the voting phase.`
   } else if (phase == 4) {
     announcementMsg = announcementMsg + nl + `Voting Phase`
     announcementMsg = announcementMsg + nl + customerList[participantList[0]].name + ` -> !vote 1`
     announcementMsg = announcementMsg + nl + customerList[participantList[1]].name + ` -> !vote 2`
+    announcementMsg = announcementMsg + nl 
+    announcementMsg = announcementMsg + nl + `JUDGES:`
+    
+    for (var D = 0; D < juryList.length; D++) {
+      announcementMsg = announcementMsg + nl + ` - ` + customerList[juryList[D]].name
+    }
+
   }
   announcementMsg = announcementMsg + nl + `-----------------------------------------------------`
   ServerSend("ChatRoomChat", { Content: announcementMsg, Type: "Emote", Target: sender.MemberNumber } );
@@ -313,7 +331,7 @@ function selectParticipantAnnouncement(){
   ServerSend("ChatRoomChat", { Content: announcementMsg, Type: "Emote"} );
 
   // Update the petpost
-  InventoryGet(Player, "ItemNeckRestraints").Property.Text = "Participants:"
+  InventoryGet(Player, "ItemNeckRestraints").Property.Text = "Participants"
   InventoryGet(Player, "ItemNeckRestraints").Property.Text2 = "?"
   InventoryGet(Player, "ItemNeckRestraints").Property.Text3 = "?"
   ChatRoomCharacterUpdate(Player)
@@ -327,6 +345,7 @@ function sendContestAnnouncement(){
   announcementMsg = announcementMsg + nl + `Participant 1: ` + customerList[participantList[0]].name
   announcementMsg = announcementMsg + nl + `Participant 2: ` + customerList[participantList[1]].name
   announcementMsg = announcementMsg + nl + `THEME: ` + theme
+  announcementMsg = announcementMsg + nl 
   announcementMsg = announcementMsg + nl + `Use the command !end when you feel ready and want to move to the voting phase.`
   announcementMsg = announcementMsg + nl + `-----------------------------------------------------`
   ServerSend("ChatRoomChat", { Content: announcementMsg, Type: "Emote"} );
@@ -346,14 +365,32 @@ function endContestPhaseAnnouncement(){
 function startVotePhase(){
   clearTimeout(timeoutHandler)
   phase = 4
+
+  for (var D = 0; D < ChatRoomCharacter.length; D++) {
+    if (!participantList.includes(ChatRoomCharacter[D].MemberNumber) && (ChatRoomCharacter[D].MemberNumber != Player.MemberNumber)) {
+      juryList.push(ChatRoomCharacter[D].MemberNumber)
+    }
+  }
+
   announcementMsg = `*-----------------------------------------------------`
-  announcementMsg = announcementMsg + nl + `The contest phase has been concluded. Jury will now be able to vote.`
+  announcementMsg = announcementMsg + nl + `The contest phase has been concluded. Judges will now be able to vote.`
   announcementMsg = announcementMsg + nl + customerList[participantList[0]].name + ` -> !vote 1`
   announcementMsg = announcementMsg + nl + customerList[participantList[1]].name + ` -> !vote 2`
-  announcementMsg = announcementMsg + nl + `The vote will end in FIVE MINUTES`
+  announcementMsg = announcementMsg + nl 
+  announcementMsg = announcementMsg + nl + `JUDGES:`
+  
+  for (var D = 0; D < juryList.length; D++) {
+    announcementMsg = announcementMsg + nl + ` - ` + customerList[juryList[D]].name
+  }
+
+  announcementMsg = announcementMsg + nl 
+  announcementMsg = announcementMsg + nl + `The vote will end in FIVE MINUTES or after all the judges have voted.`
   announcementMsg = announcementMsg + nl + `-----------------------------------------------------`
   ServerSend("ChatRoomChat", { Content: announcementMsg, Type: "Emote"} );
   timeoutHandler = setTimeout(endVotePhase, 5*60*1000)
+
+  checkTotalVotes()
+
 }
 
 function endVotePhase(){
@@ -369,11 +406,16 @@ function endVotePhase(){
   }
 
   announcementMsg = `*-----------------------------------------------------`
-  announcementMsg = announcementMsg + nl + `The jury has voted.`
-  announcementMsg = announcementMsg + nl + customerList[participantList[0]].name + `: ` + voteCount[1] + ` votes`
-  announcementMsg = announcementMsg + nl + customerList[participantList[1]].name + `: ` + voteCount[2] + ` votes`
+  announcementMsg = announcementMsg + nl + `The judges have voted.`
+  announcementMsg = announcementMsg + nl + customerList[participantList[0]].name + `: ` + voteCount[0] + ` votes`
+  announcementMsg = announcementMsg + nl + customerList[participantList[1]].name + `: ` + voteCount[1] + ` votes`
   announcementMsg = announcementMsg + nl
   announcementMsg = announcementMsg + nl + (winner ? `The WINNER is ` + winner + `!` : `It was a DRAW...`)
+
+  if (juryList.length == 0) {
+    announcementMsg = announcementMsg + nl + `... actually an obvious result since there were no judges, but at least I hope you enjoyed your competition.`
+  }
+
   announcementMsg = announcementMsg + nl + `-----------------------------------------------------`
   ServerSend("ChatRoomChat", { Content: announcementMsg, Type: "Emote"} );
 
@@ -383,12 +425,14 @@ function endVotePhase(){
 
 function newCustomer(sender) {
 	customerList[sender.MemberNumber] = new personMagicData()
-  customerList[sender.MemberNumber].name = sender.Name
+  customerList[sender.MemberNumber].name = charname(sender)
 }
 
 function resetRoom() {
+  clearTimeout(timeoutHandler)
   phase = 1  // 0 - waiting phase ; 1 - select participant ; 2 - theme announcement (actually fake phase currently); 3 - contest ; 4 - vote 
   participantList = []
+  juryList = []
   startCommandList = [] // will contain the memberNumber of those that used the !start command.
   endCommandList = [] // will contain the memberNumber of those that used the !end command.
   voteCount = [0, 0]
@@ -400,10 +444,10 @@ function resetRoom() {
   InventoryWear(Player, "PetPost","ItemNeckRestraints",["Default","#845343", "#A1794A", "Default","#020202","#F3F3F3","#F3F3F3","#FFF483", "#FFBCD6","Default"])
   InventoryGet(Player, "ItemNeckRestraints").Property = {}
   InventoryGet(Player, "ItemNeckRestraints").Property.Type = "p1d0l0s7m1x0"
-  InventoryGet(Player, "ItemNeckRestraints").Property.Text = "Participants"
-  InventoryGet(Player, "ItemNeckRestraints").Property.Text2 = "?"
-  InventoryGet(Player, "ItemNeckRestraints").Property.Text3 = "?"
   ChatRoomCharacterUpdate(Player)
+
+  ServerSend("ChatRoomChat", { Content: "*ROOM RESETTED", Type: "Emote"} );
+  selectParticipantAnnouncement()
 }
 
 
@@ -411,7 +455,7 @@ function checkRoomForCustomer() {
   for (var D = 0; D < ChatRoomCharacter.length; D++) {
     if (!(ChatRoomCharacter[D].MemberNumber in customerList)) {
       newCustomer(ChatRoomCharacter[D])
-      console.log("Added " + ChatRoomCharacter[D].Name + " as customer.")
+      console.log("Added " + charname(ChatRoomCharacter[D]) + " as customer.")
     }
   }
 }

@@ -72,7 +72,6 @@ Theme Examples:
  - The most provocant and sexy
  - Demonstrate how a club slave should be punished when being rude to a club mistress
  - The art of shibari
- - The most obedient contenstant (the contestant must demonstrate how obedient she is, not someone else)
 
 ------------------------------------------------
 Commands
@@ -80,7 +79,7 @@ Commands
 !participate - use this command to participate in the next competition
 !force <name> - use this command to try forcing someone else in the next competition
 !end - use this command to end the contest phase when you think you ave done everything you could to please the jury
-!vote <number> - vote the best contestant (only jurors)
+!vote 1 or 2 - vote the best contestant (only jurors)
 !info - gives information on the current competition
 !reset - reset the room (use this ONLY if the script brakes)
 
@@ -100,7 +99,7 @@ themeList.push("The most dominant *contenstant only (the contestant must demonst
 themeList.push("The best maid *contenstant only (the contestant must demonstrate to be the best maid, not someone else)")
 themeList.push("The bride")
 themeList.push("Forever pleasure")
-themeList.push("The one that have most orgasms wins")
+//themeList.push("The one that have most orgasms wins")
 themeList.push("The best forniture to decorate the manor wins")
 themeList.push("Spanking demonstration")
 themeList.push("Make a mess")
@@ -266,6 +265,9 @@ function commandHandler(sender, msg) {
       voteCount[0] = voteCount[0] + 1 
     } else if (msg.toLowerCase().includes("2")) {
       voteCount[1] = voteCount[1] + 1
+    } else {
+      ServerSend("ChatRoomChat", { Content: "*Vote is not valid. Use [!vote 1] or [!vote 2] ", Type: "Emote", Target: sender.MemberNumber} );
+      return
     }
 
     votedList.push(sender.MemberNumber)

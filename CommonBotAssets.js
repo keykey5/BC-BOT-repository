@@ -7,6 +7,7 @@
 // BOTAccountDict[<MemeberNumber>].AccountName = "<accountname>"
 // BOTAccountDict[<MemeberNumber>].Password = "<password>"
 
+
 ServerSocket.on("connect", ServerConnect); //ServerConnect modified below for auto-relog
 
 function ServerConnect() {
@@ -557,6 +558,14 @@ function charFromName(charName) {
   return char
 }
 
+function charname(charObject){
+	if (charObject.Nickname) {
+		return charObject.Nickname
+	} else {
+		return charObject.Name
+	}
+}
+
 
 //-------------------------------------------------------------------------------------------------------------------------
 clothMemoryList = {}
@@ -581,7 +590,7 @@ function reapplyClothing(char, update=true) {
 
 function getCharByName(name) {
 	for (var i = 0; i < ChatRoomCharacter.length; i++) {
-		if (ChatRoomCharacter[i].Name == name) {
+		if (ChatRoomCharacter[i].Name == name || ChatRoomCharacter[i].Nickname == name) {
 			return ChatRoomCharacter[i]
 		}
 	}

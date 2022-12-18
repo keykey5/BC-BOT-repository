@@ -916,7 +916,8 @@ function resetRoom() {
 		Admin: ChatRoomData.Admin,
 		Ban: ChatRoomData.Ban,
 		Private: false,
-		Locked: false
+		Locked: false,
+    Language: "EN"
 	};
 	ServerSend("ChatRoomAdmin", { MemberNumber: Player.ID, Room: UpdatedRoom, Action: "Update" });
 	ChatAdminMessage = "UpdatingRoom";
@@ -935,7 +936,8 @@ function closeRoomStory() {
 		Admin: ChatRoomData.Admin,
 		Ban: ChatRoomData.Ban,
 		Private: false,
-		Locked: true
+		Locked: true,
+    Language: "EN"
 	};
 	ServerSend("ChatRoomAdmin", { MemberNumber: Player.ID, Room: UpdatedRoom, Action: "Update" });
 	ChatAdminMessage = "UpdatingRoom";
@@ -952,7 +954,8 @@ function openRoomStory() {
 		Admin: ChatRoomData.Admin,
 		Ban: ChatRoomData.Ban,
 		Private: ChatRoomData.Private,
-		Locked: false
+		Locked: false,
+    Language: "EN"
 	};
 	ServerSend("ChatRoomAdmin", { MemberNumber: Player.ID, Room: UpdatedRoom, Action: "Update" });
 	ChatAdminMessage = "UpdatingRoom";

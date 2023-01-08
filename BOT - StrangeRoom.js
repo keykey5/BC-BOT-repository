@@ -510,7 +510,7 @@ function commandHandler(sender, msg) {
           // Slave
           // lookLikeSlave = [ isExposed(sender) + sender.IsKneeling() + InventoryIsWorn(sender, "HarnessBallGag", "ItemMouth") + InventoryIsWorn(sender, "LeatherArmbinder", "ItemArms") ]
           if (CharacterIsNaked(sender) && InventoryIsWorn(sender, "HarnessBallGag", "ItemMouth") && InventoryIsWorn(sender, "LeatherArmbinder", "ItemArms")) {
-            if (sender.IsKneeling() && charPos[partnerMemberNumber] == 'mirror' && dressLikeMistress(partnerMemberNumber) && InventoryIsWorn(charDict[partnerMemberNumber],"SpankingToys","ItemHands")) {
+            if (sender.IsKneeling() && charPos[partnerMemberNumber] == 'mirror' && dressLikeMistress(partnerMemberNumber) && InventoryIsWorn(charDict[partnerMemberNumber],"Crop","ItemHandheld")) {
               ServerSend("ChatRoomChat", { Content: "*Private: You see yourself exposed and restrained, kneeling near a Mistress. You feel ashamed but nonetheless the image makes you proud.", Type: "Emote", Target: sender.MemberNumber} );
               ServerSend("ChatRoomChat", { Content: "*SECRET: A message appears on the mirror: 'One of you will loose her freedom. If you whisper to " + Player.Name + " (save me), you may be spared in the end, but the mistress will be doomed in your place. What to do is for you to decide'.", Type: "Emote", Target: sender.MemberNumber} );
               return // skip the part below about the partner being near you and the part about kneeling
@@ -539,15 +539,15 @@ function commandHandler(sender, msg) {
 
           // Mistress
           // lookLikeSlave = [ isExposed(sender.) + sender.IsKneeling() + InventoryIsWorn(sender, "HarnessBallGag", "ItemMouth") + InventoryIsWorn(sender, "LeatherArmbinder", "ItemArms") ]
-          if (!dressLikeMistress(sender.MemberNumber) && !InventoryIsWorn(sender,"SpankingToys","ItemHands")) {
+          if (!dressLikeMistress(sender.MemberNumber) && !InventoryIsWorn(sender,"Crop","ItemHandheld")) {
             ServerSend("ChatRoomChat", { Content: "*Private: You look at your own reflection in the mirror: you feel beautiful.", Type: "Emote", Target: sender.MemberNumber} );
-          } else if (dressLikeMistress(sender.MemberNumber) && !InventoryIsWorn(sender,"SpankingToys","ItemHands")) {
+          } else if (dressLikeMistress(sender.MemberNumber) && !InventoryIsWorn(sender,"Crop","ItemHandheld")) {
             ServerSend("ChatRoomChat", { Content: "*Private: You look at your clothes, for sure you are sexy like a Mistress should be. But something is missing, your image doesn't look as powerful as it could be.", Type: "Emote", Target: sender.MemberNumber} );
-          } else if (!dressLikeMistress(sender.MemberNumber) && InventoryIsWorn(sender,"SpankingToys","ItemHands")) {
+          } else if (!dressLikeMistress(sender.MemberNumber) && InventoryIsWorn(sender,"Crop","ItemHandheld")) {
             ServerSend("ChatRoomChat", { Content: "*Private: You look at yourself whipping the air with the crop in your hand. That feels powerful, but could your reflection be more sexy and provocant?", Type: "Emote", Target: sender.MemberNumber} );
-          } else if (dressLikeMistress(sender.MemberNumber) && InventoryIsWorn(sender,"SpankingToys","ItemHands") && (charPos[partnerMemberNumber] != "mirror")) {
+          } else if (dressLikeMistress(sender.MemberNumber) && InventoryIsWorn(sender,"Crop","ItemHandheld") && (charPos[partnerMemberNumber] != "mirror")) {
             ServerSend("ChatRoomChat", { Content: "*Private: With those clothes and the crop in your hand you look as sexy and powerful as you could ever be. You enjoy your reflection as if nothing is missing...", Type: "Emote", Target: sender.MemberNumber} );
-          } else if (dressLikeMistress(sender.MemberNumber) && InventoryIsWorn(sender,"SpankingToys","ItemHands") && (charPos[partnerMemberNumber] == "mirror") && !lookLikeSlave(partnerMemberNumber)) {
+          } else if (dressLikeMistress(sender.MemberNumber) && InventoryIsWorn(sender,"Crop","ItemHandheld") && (charPos[partnerMemberNumber] == "mirror") && !lookLikeSlave(partnerMemberNumber)) {
             ServerSend("ChatRoomChat", { Content: "*Private: With those clothes and the crop in your hand you look as sexy and powerful as you could ever be. " + charDict[partnerMemberNumber].Name + " is on your side, but... something is off.", Type: "Emote", Target: sender.MemberNumber} );
             return // skip the part below about the partner being near you
           } else {

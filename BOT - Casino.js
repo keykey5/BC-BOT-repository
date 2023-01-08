@@ -11,6 +11,7 @@ nl = `
 // new line in chat - END
 
 Player.Description = `Code available here: https://github.com/keykey5/BC-BOT-repository
+Comment and suggestion thread on BC Discord: https://discord.com/channels/554377975714414605/1024007221845164052
 ----------------------------------------
 
 THE PLAYER: a player takes a sub as their stack and play using their clothes and restraints as chips.

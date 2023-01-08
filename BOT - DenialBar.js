@@ -1,6 +1,5 @@
 // System - Subs: you don't have permission to orgasm. Dom: have fun.
 //
-// [BOT] Come play, chat. >>FREE GIFT<< for subs
 // -----------------------------------------------------------------------------
 
 
@@ -262,9 +261,6 @@ function ChatRoomMessageDenialShop(SenderCharacter, msg, data) {
 function ChatRoomMessageDenialRule(SenderCharacter, msg, data) {
   if (data.Type != null && SenderCharacter.MemberNumber != Player.MemberNumber && customerList[SenderCharacter.MemberNumber] != null) {
     if ((data.Type == "Action")) {
-      //console.log("msg :" + msg)
-      //console.log("Keys :" + Object.keys(data.Dictionary))
-      //console.log("Dictionary 0 :" + data.Dictionary[0].MemberNumber)
       for (let D = 0; D < data.Dictionary.length; D++) {
        if (data.Dictionary[D].Automatic) return
       }
@@ -300,10 +296,6 @@ function ChatRoomMessageDenialRule(SenderCharacter, msg, data) {
       }
       //
     } else if ((data.Type == "Activity")) {
-      // console.log(msg)
-      // OrgasmFailResist  OrgasmResist   							count as resisted
-      // OrgasmFailPassive OrgasmFailSurrender OrgasmFailTimeout 	count as failed even if OrgasmFailTimeout can get pretty hard when ruin gets high
-      // 🌹 ❤ 🐇
       if (msg.startsWith("OrgasmResist") || msg.startsWith("OrgasmFailResist")) {
         if (customerList[SenderCharacter.MemberNumber].beingPunished) {
           customerList[SenderCharacter.MemberNumber].orgasmResisted = customerList[SenderCharacter.MemberNumber].orgasmResisted + 1
@@ -369,7 +361,6 @@ function enterLeaveEvent(sender,msg) {
 			newCustomer(sender)
 		}
 	}
-  //console.log(sender.Name + "ENTERED")
 }
 
 function orgasmReaction(sender) {
@@ -393,24 +384,17 @@ function givePunishment(sender) {
 
 function customerRoleDildo(sender, force = false) {
 	role = customerList[sender.MemberNumber].role
-	//console.log(sender.Name + " Role: " + role)
 	if (role == "sub2") {
-		//console.log(sender.Name + "sub2 IF")
 		InventoryWear(sender, "VibratingButtplug","ItemButt","Default")
 		InventoryGet(sender,"ItemButt").Property = { "Intensity":customerList[sender.MemberNumber].buttIntensity,"Effect": ["Egged","Vibrating"],"Mode":"Medium"}
-		//{"Intensity":1,"Effect":["Egged","Vibrating"],"Mode":"Medium"}
-		//InventoryGet(sender,"ItemButt").Asset.Effect = []
 	}
 	if (role.includes("sub") || force) {
-		//console.log(sender.Name + "sub IF")
 		InventoryWear(sender, "VibratingDildo","ItemVulva","Default")
 		InventoryGet(sender,"ItemVulva").Property = {Mode: VibratorModeList[customerList[sender.MemberNumber].vulvaIntensity+1], Intensity: customerList[sender.MemberNumber].vulvaIntensity, Effect: ["Egged", "Vibrating"] }
-		//InventoryGet(sender,"ItemVulva").Asset.Effect = []
 		InventoryWear(sender, "PolishedChastityBelt", "ItemPelvis","Default",100)
 		InventoryGet(sender,"ItemPelvis").Property = {Block: [ "ItemButt" ], Restrain: "ClosedBack"}
 		InventoryLock(sender, InventoryGet(sender, "ItemPelvis"), { Asset: AssetGet("Female3DCG", "ItemMisc", "CombinationPadlock")})
 		InventoryGet(sender, "ItemPelvis").Property.CombinationNumber = customerList[sender.MemberNumber].lockCode
-		//CharacterLoadEffect(sender)
 	}
 }
 
@@ -492,39 +476,3 @@ function adulationCheck(targetMemberNumber) {
     }
   }
 }
-
-
-
-//TODO Check vibe change correctly
-//
-//BondageClub/Scripts/VibratorMode.js line 715
-//
-//apparently bot removes love locks for non lovers of bot... hmmmm
-//↩️Gwen: (Well I came in here with a lovers locked training belt and now don't have it
-//it borks only with the training belt... other belts stay locked
-//
-//faltering speech and gagged whispers bcx rules can mess things up
-
-//if player has diaper, swap diaper item to diaper cloth before adding polished belt
-
-//Player submitted ideas
-//↩️Davina: (maybe a denial punishment where the sub is put on display and gets edged by the scifi panties for x amount of minutes and has to repeat embarrassing sentences to be released after their time is up?
-
-//↩️Yuria: If there are too many subs allow for one to be "promoted" temporarily to be able to earn points
-//↩️Yuria: and the other, well.. maybe sub lvl2 "downgrade"
-//↩️Yuria: though not sure what thta may be
-//Whisper to Yuria: more restrains and toys maybe ?
-//↩️Yuria: and possibly additional vibes on breasts
-
-//↩️danny: Maybe try making it where you can choose to be sub or dom in here
-
-
-//----------
-//gg: add the denial bar setup here, as a-a w-whipser command for o-olaf
-//gg: Oh... maybe a kitty mode. maybe something like the outfit and vibes that Helpy's in...
-//Gwen: An escape challenge could be fun too nyaa
-//Gwen: Bind a pair of people up in the same restraints and see who escapes all of them first nyaa
-
-
-
-

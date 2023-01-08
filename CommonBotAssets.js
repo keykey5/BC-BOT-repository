@@ -245,22 +245,13 @@ function dressLike(char, dress = "doll", dressColor = "default", removeUnderwear
   if (dress == "doll") {
 
     InventoryWear(target, "Irish8Cuffs","ItemFeet",dressColor,24)
-    //{"Group":"ItemLegs","Name":"SeamlessHobbleSkirt","Color":"#222222","Difficulty":24
     InventoryWear(target, "SeamlessHobbleSkirt","ItemLegs",dressColor,24)
-    //{"Group":"ItemBoots","Name":"BalletWedges","Color":"Default","Difficulty":16
     InventoryWear(target, "BalletWedges","ItemBoots",dressColor,16)
-    //{"Group":"ItemMouth","Name":"DeepthroatGag","Color":"#404040","Difficulty":15
     InventoryWear(target, "DeepthroatGag","ItemMouth",dressColor,15)
-    //{"Group":"ItemMouth2","Name":"HarnessPanelGag","Color":"#404040","Difficulty":16
     InventoryWear(target, "HarnessPanelGag","ItemMouth2",dressColor,16)
-    //{"Group":"ItemMouth3","Name":"StitchedMuzzleGag","Color":"Default","Difficulty":15
     InventoryWear(target, "StitchedMuzzleGag","ItemMouth3",dressColor,15)
-    //{"Group":"ItemArms","Name":"ArmbinderJacket","Color":["#B23E46","#0A0A0A","Default"],"Difficulty":22
     InventoryWear(target, "ArmbinderJacket","ItemArms",[dressColor,"#0A0A0A","Default"],22)
-    //console.log(target.MemberNumber + " - Arms - " + InventoryGet(target, "ItemArms").Color)
-    //{"Group":"ItemHood","Name":"KirugumiMask","Color":["#9A7F76","Default","Default","#cc33cc"],"Difficulty":25,"Property":{"Type":"e2m3b1br0op2ms0","Difficulty":15,"Block":["ItemMouth","ItemMouth2","ItemMouth3","ItemHead","ItemNose","ItemEars"],"Effect":["BlindHeavy","Prone","BlockMouth"],"Hide":["Glasses","ItemMouth","ItemMouth2","ItemMouth3","Mask","ItemHead"],"HideItem":["ItemHeadSnorkel"]}}]
     InventoryWear(target, "KirugumiMask","ItemHood",["#9A7F76","Default","Default",dressColor],25)
-    //console.log(target.MemberNumber + " - Hood - " + InventoryGet(target, "ItemHood").Color)
     InventoryGet(target, "ItemHood").Property = {"Type":"e2m3b1br0op2ms0","Difficulty":15,"Effect":["BlindHeavy","Prone","BlockMouth"],"Hide":["Glasses","ItemMouth","ItemMouth2","ItemMouth3","Mask","ItemHead"],"HideItem":["ItemHeadSnorkel"]}
 
 
@@ -299,8 +290,8 @@ function dressLike(char, dress = "doll", dressColor = "default", removeUnderwear
 
 
 	} else if (dress == "cow") {
-    //InventoryWear(target, "CowPrintedBra","Bra")
-    InventoryWear(target, "CowPrintedPanties","Panties")
+    	//InventoryWear(target, "CowPrintedBra","Bra")
+    	InventoryWear(target, "CowPrintedPanties","Panties")
 		InventoryWear(target, "CowHorns","HairAccessory1")
 		InventoryWear(target, "BoxTieArmbinder","ItemArms","default", 50)
 		InventoryWear(target, "PonyBoots","Shoes")
@@ -334,7 +325,7 @@ function dressLike(char, dress = "doll", dressColor = "default", removeUnderwear
 		InventoryWear(target, "Corset4","Corset",dressColor)
 		InventoryWear(target, "PonyEars1","HairAccessory2",dressColor)
 		InventoryWear(target, "HarnessPanties2","ItemPelvis",dressColor)
-	  InventoryWear(target, "HarnessBra2","Bra",dressColor)
+		InventoryWear(target, "HarnessBra2","Bra",dressColor)
 
 	} else if (dress == "cat"|| dress == "kitty") {
 		InventoryWear(target, "TailButtPlug","ItemButt",dressColor)

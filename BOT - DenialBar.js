@@ -61,7 +61,8 @@ In the shop you will be able to buy the following items:
 - DomLv2 (` + DomLv2Cost + ` points): upgrade your status inside this bar, you will be given the authority to change the vibrators settings as you wish. But remember: turning them off is always prohibited!
 - Adulation (` + adulationCost + ` points): we want you to feel appreciated while you are here. You will get some lovely attentions.
 ------------------------------------------------
-COMMANDS: all commands must be whispered.
+COMMANDS: all commands must be whispered
+(or used after /bot, if you are experiencing issues with FBC's Alternative Speech Stutter and BCX Garble whispers while gagged rule. Ex : '/bot !leave')
 
 !leave - you will be freed and kicked out of the room.
 
@@ -82,7 +83,7 @@ function ChatRoomMessageEnterLeave(SenderCharacter, msg, data) {
   if ((data.Type == "Action") && (msg.startsWith("ServerEnter"))) {
     setTimeout(enterLeaveEvent,1*1000,SenderCharacter,msg)
   } else if (data.Type != null && SenderCharacter.MemberNumber != Player.MemberNumber) {
-    if ((data.Type == "Chat") || (data.Type == "Whisper")) {
+    if ((data.Type == "Chat") || (data.Type == "Whisper") || (data.Type == "Hidden")) {
       if (msg.includes("!leave")) {
         // remove all locks, dildo, chastitybelt and kick
         free(SenderCharacter.MemberNumber, update = false)
@@ -99,7 +100,7 @@ function ChatRoomMessageEnterLeave(SenderCharacter, msg, data) {
 function ChatRoomMessageDenialShop(SenderCharacter, msg, data) {
   if (data.Type != null && SenderCharacter.MemberNumber != Player.MemberNumber && customerList[SenderCharacter.MemberNumber] != null) {
 
-    if ((data.Type == "Chat") || (data.Type == "Whisper")) {
+    if ((data.Type == "Chat") || (data.Type == "Whisper") || (data.Type == "Hidden")) {
       if (msg.includes("!point") && customerList[SenderCharacter.MemberNumber].role.includes("dom")) {
         ServerSend("ChatRoomChat", { Content: "(Private) Points: " + customerList[SenderCharacter.MemberNumber].points, Type: "Chat", Target: SenderCharacter.MemberNumber} );
       } if ((msg.toLowerCase().includes("!buy") || msg.toLowerCase().includes("!shop")) && customerList[SenderCharacter.MemberNumber].role.includes("sub")) {
@@ -177,7 +178,7 @@ function ChatRoomMessageDenialShop(SenderCharacter, msg, data) {
               ServerSend("ChatRoomChat", { Content: "(Private) You don't have enough points.", Type: "Chat", Target: SenderCharacter.MemberNumber} );
             }
           } else {
-            mess = `To buy an item say '!buy <item>'.
+            mess = `To buy an item say '!buy <item>' or '/bot !buy <item>'.
             Here is a list of available items:
             -----------------------------------
             Permission (`+permissionCost+` pt)
@@ -354,7 +355,7 @@ function enterLeaveEvent(sender,msg) {
     setTimeout(function(sender) {ChatRoomAdminChatAction("Kick", sender.MemberNumber.toString())}, 10*1000, sender)
   } else {
 		ServerSend("ChatRoomChat", { Content: "*[ROOM EXPLANATION: orgasms are prohibited. More info in " + Player.Name + " Bio. READ IT]", Type: "Emote", Target: sender.MemberNumber} );
-		ServerSend("ChatRoomChat", { Content: "*[Say or whisper '!leave' and all the locks on you will be unlocked, but you will also be kicked out.]", Type: "Emote", Target: sender.MemberNumber} );
+		ServerSend("ChatRoomChat", { Content: "*[Say or whisper '!leave' (or use '/bot !leave') and all the locks on you will be unlocked, but you will also be kicked out.]", Type: "Emote", Target: sender.MemberNumber} );
 		if (sender.MemberNumber in customerList) {
 			ServerSend("ChatRoomChat", { Content: "Welcome back " + sender.Name + ". Don't worry I didn't forget about you. Hihihi.", Type: "Chat", Target: sender.MemberNumber} );
 			if (customerList[sender.MemberNumber].beingPunished) {

@@ -30,6 +30,7 @@ ChatRoomMessageAdditionDict["DenialShop"] = function (SenderCharacter, msg, data
 ChatRoomMessageAdditionDict["DenialRule"] = function (SenderCharacter, msg, data) { ChatRoomMessageDenialRule(SenderCharacter, msg, data) }
 
 Player.Description = `Code available here: https://github.com/keykey5/BC-BOT-repository
+Comment and suggestion thread on BC Discord: https://discord.com/channels/554377975714414605/1024007221845164052
 
 ------------------------------------------------
 

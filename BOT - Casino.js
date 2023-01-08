@@ -428,7 +428,7 @@ function stackPay(targetMemberNumber, chipsLost) {
 function newCustomer(sender) {
 	customerList[sender.MemberNumber] = new personMagicData()
   customerList[sender.MemberNumber].name = sender.Name
-	if (ReputationCharacterGet(sender,"Dominant")<50) {
+	if (ReputationCharacterGet(sender,"Dominant")<=0) {
 		ServerSend("ChatRoomChat", { Content: sender.Name + ", I am delighted that you decided to enter this casino. You have been chained and if you want to leave here you will have to earn your freedom.", Type: "Chat", Target:sender.MemberNumber} );
 		customerList[sender.MemberNumber].role ='sub'
 	} else {

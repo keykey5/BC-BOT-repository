@@ -32,6 +32,7 @@ ChatRoomMessageAdditionDict["EnterLeave"] = function(sender, msg, data) {ChatRoo
 ChatRoomMessageAdditionDict["Office"] = function(sender, msg, data) {ChatRoomMessageOffice(sender, msg, data)}
 
 Player.Description = `Code available here: https://github.com/keykey5/BC-BOT-repository
+Comment and suggestion thread on BC Discord: https://discord.com/channels/554377975714414605/1024007221845164052
 
 ------------------------------------------------
 

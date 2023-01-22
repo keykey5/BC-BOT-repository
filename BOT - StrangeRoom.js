@@ -993,7 +993,7 @@ function lookLikeSlave(memNum) {
 }
 
 function dressLikeMistress(memNum) {
-  return (InventoryIsWorn(charDict[memNum],"MistressBoots","Shoes") && InventoryIsWorn(charDict[memNum],"MistressBottom","ClothLower") && InventoryIsWorn(charDict[memNum],"MistressGloves","Gloves") && InventoryIsWorn(charDict[memNum],"MistressTop","Cloth"))
+  return ((InventoryIsWorn(charDict[memNum],"MistressBoots","Shoes") || InventoryIsWorn(charDict[memNum],"DeluxeBoots","Shoes")) && InventoryIsWorn(charDict[memNum],"MistressBottom","ClothLower") && InventoryIsWorn(charDict[memNum],"MistressGloves","Gloves") && InventoryIsWorn(charDict[memNum],"MistressTop","Cloth"))
 }
 
 function InventoryBlockedOrLimitedCustomized(C, ItemAsset, ItemType) {

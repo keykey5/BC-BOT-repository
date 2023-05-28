@@ -204,8 +204,8 @@ function ChatRoomMessageDenialShop(SenderCharacter, msg, data) {
           if (data.Dictionary != null) {
             for (var D = 0; D < data.Dictionary.length; D++) {
               if ((data.Dictionary[D].MemberNumber != null) && (data.Dictionary[D].Tag == "TargetCharacter")) TargetMemberNumber = data.Dictionary[D].MemberNumber;
-              if (data.Dictionary[D].Tag == "ActivityName") ActivityName = data.Dictionary[D].Text;
-              if (data.Dictionary[D].Tag == "ActivityGroup") ActivityGroup = data.Dictionary[D].Text;
+              if (data.Dictionary[D].ActivityName) ActivityName = data.Dictionary[D].ActivityName;
+              if (data.Dictionary[D].FocusGroupName) ActivityGroup = data.Dictionary[D].FocusGroupName;
             }
           }
           if (TargetMemberNumber != null && TargetMemberNumber != SenderCharacter.MemberNumber) {

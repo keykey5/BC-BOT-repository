@@ -36,12 +36,12 @@ COMMANDS: all commands starts with !
 !leave - You will be restrained with a mistress timer padklock (5 mins) and kicked out of the room.
 !point - use this to check how many wins you have, how many chips and who is your domme/sub.
 
-!start - [Dommes ONLY] start a new round
-!play - [Dommes ONLY] when a new round starts you can play by using this command. You need to have a stack.
-!no - [Dommes ONLY] you can use this command to say that you are not playing a round. This may help speed up the first phase.
-!bet - [Dommes ONLY] after the first card is shown you can bet with this command
-!fold - [Dommes ONLY] after the first card is shown you can fold with this command
-!stack <name_of_the_sub> - [Dommes ONLY] use this to take a sub as your stack (dommes only)
+!start - [Player ONLY] start a new round
+!play - [Player ONLY] when a new round starts you can play by using this command. You need to have a stack.
+!no - [Player ONLY] you can use this command to say that you are not playing a round. This may help speed up the first phase.
+!bet - [Player ONLY] after the first card is shown you can bet with this command
+!fold - [Player ONLY] after the first card is shown you can fold with this command
+!stack <name_of_the_sub> - [Dommes or Subs] use this to take a sub as your stack (Subs are at a disadvantage)
 !accept - [Subs ONLY] to accept a domme
 !refuse - [Subs ONLY] to refuse a domme
 ` // end of description

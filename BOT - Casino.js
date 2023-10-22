@@ -163,19 +163,7 @@ function checkWinners() {
     if (!(ChatRoomCharacter[D].MemberNumber in customerList)) { continue }
 
     if (customerList[ChatRoomCharacter[D].MemberNumber].role == "sub") {
-      if (customerList[ChatRoomCharacter[D].MemberNumber].chips <= 0) {
-        ServerSend("ChatRoomChat", { Content: ChatRoomCharacter[D].Name + ", seems that you have nothing else to give. You lost everything and now you will be locked here forever.", Type: "Chat"} );
-        if (customerList[customerList[ChatRoomCharacter[D].MemberNumber].linkedTo].isPlayer) {
-          ServerSend("ChatRoomChat", { Content: customerList[customerList[ChatRoomCharacter[D].MemberNumber].linkedTo].name + ", you didn't play very well but don't worry, just find another stack and try again!", Type: "Chat"} );
-        } else {
-          ServerSend("ChatRoomChat", { Content: customerList[customerList[ChatRoomCharacter[D].MemberNumber].linkedTo].name + ", the dumb slut that was playing with you demonstrated to be a complete failure. You have to find someone else to play with.", Type: "Chat"} );
-        }
-        customerList[customerList[ChatRoomCharacter[D].MemberNumber].linkedTo].linkedTo = 0
-        customerList[customerList[ChatRoomCharacter[D].MemberNumber].linkedTo].isPlayer = false
-        customerList[ChatRoomCharacter[D].MemberNumber].linkedTo = 0
-        customerList[ChatRoomCharacter[D].MemberNumber].isPlayer = false
-        customerList[ChatRoomCharacter[D].MemberNumber].role = "loser"
-      } else if (customerList[ChatRoomCharacter[D].MemberNumber].winNum >= 5) {
+	  if (customerList[ChatRoomCharacter[D].MemberNumber].winNum >= 5) {
         ServerSend("ChatRoomChat", { Content: "Congratulations " + ChatRoomCharacter[D].Name + "! You got 5 wins. You have earned your freedom. You can leave or you can continue playing as if you were a domme.", Type: "Chat"} );
         ServerSend("ChatRoomChat", { Content: "(Private) Your lock code is: " + customerList[ChatRoomCharacter[D].MemberNumber].lockCode , Type: "Chat", Target: ChatRoomCharacter[D].MemberNumber});
         if (customerList[customerList[ChatRoomCharacter[D].MemberNumber].linkedTo].isPlayer) {
@@ -189,6 +177,19 @@ function checkWinners() {
         customerList[ChatRoomCharacter[D].MemberNumber].isPlayer = false
         customerList[ChatRoomCharacter[D].MemberNumber].role = "dom"
         customerList[ChatRoomCharacter[D].MemberNumber].winNum = 0
+      }
+      else if (customerList[ChatRoomCharacter[D].MemberNumber].chips <= 0) {
+        ServerSend("ChatRoomChat", { Content: ChatRoomCharacter[D].Name + ", seems that you have nothing else to give. You lost everything and now you will be locked here forever.", Type: "Chat"} );
+        if (customerList[customerList[ChatRoomCharacter[D].MemberNumber].linkedTo].isPlayer) {
+          ServerSend("ChatRoomChat", { Content: customerList[customerList[ChatRoomCharacter[D].MemberNumber].linkedTo].name + ", you didn't play very well but don't worry, just find another stack and try again!", Type: "Chat"} );
+        } else {
+          ServerSend("ChatRoomChat", { Content: customerList[customerList[ChatRoomCharacter[D].MemberNumber].linkedTo].name + ", the dumb slut that was playing with you demonstrated to be a complete failure. You have to find someone else to play with.", Type: "Chat"} );
+        }
+        customerList[customerList[ChatRoomCharacter[D].MemberNumber].linkedTo].linkedTo = 0
+        customerList[customerList[ChatRoomCharacter[D].MemberNumber].linkedTo].isPlayer = false
+        customerList[ChatRoomCharacter[D].MemberNumber].linkedTo = 0
+        customerList[ChatRoomCharacter[D].MemberNumber].isPlayer = false
+        customerList[ChatRoomCharacter[D].MemberNumber].role = "loser"
       }
     } else {
       if (customerList[ChatRoomCharacter[D].MemberNumber].winNum == domWinReward) {
